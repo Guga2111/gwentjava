@@ -21,7 +21,7 @@ public class Board {
     //pontos da rodada (do jogador)
     private int points = 0;
 
-    public tabuleiro(){
+    public Board(){
         //construtor da mao do jogador
         this.hand = new ArrayList<>();
 
@@ -72,11 +72,4 @@ public class Board {
         this.points = points;
     }
 
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
 }
