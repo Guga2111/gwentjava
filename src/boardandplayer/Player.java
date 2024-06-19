@@ -4,7 +4,7 @@ import cards.Card;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class  Player {
+public class Player {
     //vida do jogador
     private int hp = 2;
 
