@@ -72,4 +72,15 @@ public class Board {
         this.points = points;
     }
 
+    public void addInfantCard(Card card){
+        infantary.add(card);
+    }
+
+    public void addArtillaryCard(Card card){
+        artillary.add(card);
+    }
+
+    public void addSiegeCard(Card card){
+        siege.add(card);
+    }
 }
