@@ -18,12 +18,40 @@ public class Player {
         deck = new ArrayList<Card>();
     }
 
-    public void shuffle(ArrayList<Card> deck){
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(ArrayList<Card> deck) {
+        this.deck = deck;
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
+    public void setHand(ArrayList<Card> hand) {
+        this.hand = hand;
+    }
+
+    public void shuffle(ArrayList<Card> deck, ArrayList<Card> hand){
         //criacao de objeto para randomizar
         Random random = new Random();
 
-        for(int i = 0 ; i < 10; i++){
-            int randomNumber = random.nextInt();
+        while(hand.size() < 10){
+
+            int randomNumber = random.nextInt(deck.size());
+
+            hand.add(deck.get(randomNumber));
+
         }
     }
 }
