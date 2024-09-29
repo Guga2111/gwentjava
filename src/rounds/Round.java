@@ -2,11 +2,14 @@ package rounds;
 
 import boardandplayer.Board;
 import boardandplayer.Player;
+import cards.Card;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Round {
 
+    private Scanner scanner = new Scanner(System.in);
     private int roundNumber = 1;
 
     public Round() {
@@ -29,9 +32,13 @@ public class Round {
             Random random = new Random();
             int head_tails = random.nextInt(2) ;
 
-            if(head_tails == 0){
+            if(head_tails == 0){ // player 1 comeca
                 while(player1.getHp() == 2 && player2.getHp() == 2){
 
+                    System.out.println("Qual carta voce deseja jogar: ");
+                    //Card card =
+
+                    //case baseado na carta de sua escolha
                 }
             }
         }

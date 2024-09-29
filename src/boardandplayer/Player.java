@@ -1,6 +1,8 @@
 package boardandplayer;
 
 import cards.Card;
+import rounds.Plays;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,6 +15,8 @@ public class Player {
 
     //mao do jogador
     private ArrayList<Card> hand = new ArrayList<Card>();
+
+    private Plays plays;
 
     public Player(){
         deck = new ArrayList<Card>();
