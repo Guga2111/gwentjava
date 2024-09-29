@@ -23,7 +23,7 @@ public class Round {
         this.roundNumber = roundNumber;
     }
 
-    public void game(Player player1, Player player2, Board board1, Board board2){
+    public void gameAlgorithm(Player player1, Player player2, Board board1, Board board2){
         if(roundNumber == 1){
 
             player1.shuffle(player1.getDeck(), player1.getHand());
@@ -33,12 +33,27 @@ public class Round {
             int head_tails = random.nextInt(2) ;
 
             if(head_tails == 0){ // player 1 comeca
-                while(player1.getHp() == 2 && player2.getHp() == 2){
+                while(player1.getHp() == 2 && player2.getHp() == 2 ){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
                     System.out.println("Qual carta voce deseja jogar: ");
-                    //Card card =
+                    String card_name = scanner.nextLine();
 
-                    //case baseado na carta de sua escolha
+                    for(int i = 0 ; i < player1.getHand().size(); i++){
+                        if(player1.getHand().get(i).getName().equals(card_name)){
+
+                            String card_type = player1.getHand().get(i).getType();
+
+                            if(card_type.equals("Infantary")){
+                                //inserir carta de infantaria no tabuleiro
+                            }
+                            else if(card_type.equals("Artillary")){
+                                //inserir carta de artilharia no tabuleiro
+                            } else if (card_type.equals("Siege")) {
+                                //inserir carta de cerco no tabuleiro
+                            }
+                        }
+                    }
+
                 }
             }
         }
