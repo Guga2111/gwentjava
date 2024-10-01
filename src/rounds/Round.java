@@ -35,11 +35,16 @@ public class Round {
             if(head_tails == 0){ // player 1 comeca
                 while(player1.getHp() == 2 && player2.getHp() == 2 ){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
+                    int index = 0;
+                    for(int i = 0 ; i < player1.getHand().size() ; i++){
+                        index++;
+                        System.out.println(index + ". " + player1.getHand().get(i).getName());
+                    }
                     System.out.println("Qual carta voce deseja jogar: ");
-                    String card_name = scanner.nextLine();
+                    int choose = scanner.nextInt();
 
                     for(int i = 0 ; i < player1.getHand().size(); i++){
-                        if(player1.getHand().get(i).getName().equals(card_name)){
+                        if(player1.getHand().get(i) == player1.getHand().get(choose)){
 
                             String card_type = player1.getHand().get(i).getType();
 
