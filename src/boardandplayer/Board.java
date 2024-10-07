@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Board {
     //cartas que o jogador possui na mao
-    private ArrayList<Card> hand;
+    //private ArrayList<Card> hand;
 
     //cartas no campo
     private ArrayList<Card> infantary;
@@ -23,7 +23,6 @@ public class Board {
 
     public Board(){
         //construtor da mao do jogador
-        this.hand = new ArrayList<>();
 
         //construtor dos campos de batalha
         this.infantary = new ArrayList<>();
@@ -32,14 +31,6 @@ public class Board {
     }
 
     //getters e setters
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
-
-    public void setHand(ArrayList<Card> hand) {
-        this.hand = hand;
-    }
-
     public ArrayList<Card> getInfantary() {
         return infantary;
     }
@@ -70,6 +61,22 @@ public class Board {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public void addCard(Card card, String card_type){
+
+        if(card_type.equals("infantary") || card_type.equals("Infantary")){
+            infantary.add(card);
+        }
+        else if(card_type.equals("artillary") || card_type.equals("Artillary")){
+            artillary.add(card);
+        }
+        else if(card_type.equals("siege") || card_type.equals("Siege")){
+            siege.add(card);
+        }
+        else{
+            System.out.println("Card type not recognized");
+        }
     }
 
 }
