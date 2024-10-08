@@ -10,11 +10,13 @@ public class Player {
     //vida do jogador
     private int hp = 2;
 
-    //deck do jogador // no maximo 30 cartas!
+    //deck do jogador // no maximo 40 cartas!
     private ArrayList<Card> deck = new ArrayList<Card>();
 
     //mao do jogador
     private ArrayList<Card> hand = new ArrayList<Card>();
+
+    private boolean continueMove = true;
 
     private Plays plays;
 
@@ -44,6 +46,14 @@ public class Player {
 
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
+    }
+
+    public boolean isContinueMove() {
+        return continueMove;
+    }
+
+    public void setContinueMove(boolean continueMove) {
+        this.continueMove = continueMove;
     }
 
     public void shuffle(ArrayList<Card> deck, ArrayList<Card> hand){

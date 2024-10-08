@@ -62,7 +62,7 @@ public class Round {
             int head_tails = random.nextInt(2);
 
             if(head_tails == 0){ // player 1 comeca
-                while(player1.getHp() == 2 && player2.getHp() == 2){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
+                while(player1.getHp() == 2 && player2.getHp() == 2 && (player1.isContinueMove() && player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
                     playLogic(player1, board1, player1Hand);
                     playLogic(player2, board2, player2Hand);
@@ -70,7 +70,7 @@ public class Round {
                 }
             }
             else if(head_tails == 1){ //player 2 comeca
-                while(player1.getHp() == 2 && player2.getHp() == 2 ){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
+                while(player1.getHp() == 2 && player2.getHp() == 2 && (player1.isContinueMove() && player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
                     playLogic(player2, board2, player2Hand);
                     playLogic(player1, board1, player1Hand);
