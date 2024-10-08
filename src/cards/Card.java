@@ -1,22 +1,22 @@
 package cards;
 
 public class Card {
-    private int damage; // Dano da carta (ex: 11).
+    private int points; // Dano da carta (ex: 11).
     private String name; // Nome da carte (ex: "Geralt of Rivia").
     private String type; // Tipo de carta (existem 3: Infantaria, Artilharia, e Cerco).
 
     public Card(int damage, String name, String type){
-        this.damage = damage;
+        this.points = damage;
         this.name = name;
         this.type = type;
     }
 
-    public void setDamage(int damage){
-        this.damage = damage;
+    public void setPoints(int points){
+        this.points = points;
     }
 
-    public int getDamage(){
-        return damage;
+    public int getPoints(){
+        return points;
     }
 
     public void setName(String name){
