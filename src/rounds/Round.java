@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Round {
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private int roundNumber = 1;
 
     public Round() {
@@ -27,12 +27,12 @@ public class Round {
 
     public void playLogic(Player player, Board board, ArrayList<Card> playerHand) {
 
-        int index1 = 0;
+        int index = 0;
         for(int i = 0 ; i < player.getHand().size() ; i++){
-            index1++;
-            System.out.println(index1 + ". " + player.getHand().get(i).getName());
+            index++;
+            System.out.println(index + ". " + player.getHand().get(i).getName());
         }
-        index1 = 0;
+        index = 0;
 
         System.out.println("Qual carta voce deseja jogar: ");
         int choose1 = scanner.nextInt();
