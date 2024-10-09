@@ -25,27 +25,54 @@ public class Round {
         this.roundNumber = roundNumber;
     }
 
+    //logica de verificação de quem ganhou o round
+    public void verifyPoints(Player player1, Player player2, Board board1, Board board2) {
+        if(board1.getPoints() > board2.getPoints()){
+            player2.setHp(player2.getHp() - 1);
+        }
+        else if(board2.getPoints() > board1.getPoints()){
+            player1.setHp(player1.getHp() - 1);
+        }
+        else{
+            player1.setHp(player1.getHp() - 1);
+            player2.setHp(player2.getHp() - 1);
+        }
+    }
+
     public void playLogic(Player player, Board board, ArrayList<Card> playerHand) {
 
-        int index = 0;
-        for(int i = 0 ; i < player.getHand().size() ; i++){
-            index++;
-            System.out.println(index + ". " + player.getHand().get(i).getName());
+        //basicamente verificaçao se o jogador deseja continuar jogando suas cartas ou nao naquela rodada.
+        System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
+        char choice = scanner.next().charAt(0);
+        if(choice == 'S') {
+            player.setContinueMove(false);
+            return;
         }
-        index = 0;
+        else{
+            player.setContinueMove(true);
 
-        System.out.println("Qual carta voce deseja jogar: ");
-        int choose1 = scanner.nextInt();
+            int index = 0;
 
-        //verificacao com loop nao seria necessario, porem quero verificar se aquela carta realmente existe!
-        for(int i = 0 ; i < player.getHand().size(); i++){
-            if(playerHand.get(i) == playerHand.get(choose1)){
-
-                //adicao de carta no tabuleior do jogador 1, na sua devida posicao (artilharia, cerco, ou infantaria)
-                board.addCard(playerHand.get(choose1), playerHand.get(choose1).getType());
+            for(int i = 0 ; i < player.getHand().size() ; i++){
+                index++;
+                System.out.println(index + ". " + player.getHand().get(i).getName());
             }
+            index = 0;
 
+            System.out.println("Qual carta voce deseja jogar: ");
+            int choose1 = scanner.nextInt();
+
+            //verificacao com loop nao seria necessario, porem quero verificar se aquela carta realmente existe!
+            for(int i = 0 ; i < player.getHand().size(); i++){
+                if(playerHand.get(i) == playerHand.get(choose1)){
+
+                    //adicao de carta no tabuleior do jogador 1, na sua devida posicao (artilharia, cerco, ou infantaria)
+                    board.addCard(playerHand.get(choose1), playerHand.get(choose1).getType());
+                }
+
+            }
         }
+
     }
 
     public void gameAlgorithm(Player player1, Player player2, Board board1, Board board2){
@@ -68,6 +95,8 @@ public class Round {
                     playLogic(player2, board2, player2Hand);
 
                 }
+                verifyPoints(player1, player2, board1, board2);
+
             }
             else if(head_tails == 1){ //player 2 comeca
                 while(player1.getHp() == 2 && player2.getHp() == 2 && (player1.isContinueMove() && player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
@@ -76,8 +105,12 @@ public class Round {
                     playLogic(player1, board1, player1Hand);
 
                 }
+                verifyPoints(player1, player2, board1, board2);
 
             }
+        }
+        else if(roundNumber == 2){
+            //cotninuacao
         }
     }
 }
