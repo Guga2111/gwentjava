@@ -26,7 +26,7 @@ public class Round {
     }
 
     //logica de verificação de quem ganhou o round
-    public void verifyPoints(Player player1, Player player2, Board board1, Board board2) {
+    private void verifyPoints(Player player1, Player player2, Board board1, Board board2) {
         if(board1.getPoints() > board2.getPoints()){
             player2.setHp(player2.getHp() - 1);
         }
@@ -40,7 +40,7 @@ public class Round {
         roundNumber++;
     }
 
-    public void playLogic(Player player, Board board, ArrayList<Card> playerHand) {
+    private void playLogic(Player player, Board board, ArrayList<Card> playerHand) {
 
         //basicamente verificaçao se o jogador deseja continuar jogando suas cartas ou nao naquela rodada.
         System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
@@ -78,13 +78,13 @@ public class Round {
 
     }
 
-    public void roundLogic(Player player1, Player player2, Board board1, Board board2, ArrayList<Card> player1Hand, ArrayList<Card> player2Hand){
+    private void roundLogic(Player player1, Player player2, Board board1, Board board2, ArrayList<Card> player1Hand, ArrayList<Card> player2Hand){
 
         Random random = new Random();
         int head_tails = random.nextInt(2);
 
         if(head_tails == 0){ // player 1 comeca
-            while(player1.getHp() == 2 && player2.getHp() == 2 && (player1.isContinueMove() && player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
+            while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
                 playLogic(player1, board1, player1Hand);
                 playLogic(player2, board2, player2Hand);
@@ -94,7 +94,7 @@ public class Round {
 
         }
         else if(head_tails == 1){ //player 2 comeca
-            while(player1.getHp() == 2 && player2.getHp() == 2 && (player1.isContinueMove() && player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
+            while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
                 playLogic(player2, board2, player2Hand);
                 playLogic(player1, board1, player1Hand);
@@ -119,6 +119,20 @@ public class Round {
         else if(roundNumber == 2){
             //cotninuacao
 
+            ArrayList<Card> player1Hand = player1.getHand();
+            ArrayList<Card> player2Hand = player2.getHand();
+
+            roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
+        }
+        else if(roundNumber == 3 && (player1.getHp() !=0 || player2.getHp() !=0)){
+
+            ArrayList<Card> player1Hand = player1.getHand();
+            ArrayList<Card> player2Hand = player2.getHand();
+
+            roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
+        }
+        else{
+            System.out.println("The game is over!");
         }
     }
 }
