@@ -9,12 +9,12 @@ public class Board {
     //private ArrayList<Card> hand;
 
     //cartas no campo
-    private ArrayList<Card> infantary;
+    private ArrayList<Card> infantry;
     private ArrayList<Card> artillary;
     private ArrayList<Card> siege;
 
     //pontos de cada campo
-    private int infantary_points = 0;
+    private int infantry_points = 0;
     private int artillary_points = 0;
     private int siege_points = 0;
 
@@ -25,17 +25,17 @@ public class Board {
         //construtor da mao do jogador
 
         //construtor dos campos de batalha
-        this.infantary = new ArrayList<>();
+        this.infantry = new ArrayList<>();
         this.artillary = new ArrayList<>();
         this.siege = new ArrayList<>();
     }
 
-    public int getInfantary_points() {
-        return infantary_points;
+    public int getInfantry_points() {
+        return infantry_points;
     }
 
-    public void setInfantary_points(int infantary_points) {
-        this.infantary_points = infantary_points;
+    public void setInfantry_points(int infantry_points) {
+        this.infantry_points = infantry_points;
     }
 
     public int getArtillary_points() {
@@ -56,12 +56,12 @@ public class Board {
 
 
     //getters e setters
-    public ArrayList<Card> getInfantary() {
-        return infantary;
+    public ArrayList<Card> getInfantry() {
+        return infantry;
     }
 
-    public void setInfantary(ArrayList<Card> infantary) {
-        this.infantary = infantary;
+    public void setInfantry(ArrayList<Card> infantry) {
+        this.infantry = infantry;
     }
 
     public ArrayList<Card> getArtillary() {
@@ -90,8 +90,8 @@ public class Board {
 
     public void addCard(Card card, String card_type){
 
-        if(card_type.equals("infantary") || card_type.equals("Infantary")){
-            infantary.add(card);
+        if(card_type.equals("infantry") || card_type.equals("Infantry")){
+            infantry.add(card);
         }
         else if(card_type.equals("artillary") || card_type.equals("Artillary")){
             artillary.add(card);
@@ -108,9 +108,9 @@ public class Board {
 
         int points = card.getPoints();
 
-        if(card_type.equals("infantary") || card_type.equals("Infantary")){
+        if(card_type.equals("infantry") || card_type.equals("Infantry")){
 
-            infantary_points = infantary_points + points;
+            infantry_points = infantry_points + points;
             this.points = this.points + points;
         }
         else if(card_type.equals("artillary") || card_type.equals("Artillary")){
