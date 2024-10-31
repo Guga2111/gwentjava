@@ -60,7 +60,7 @@ public class Round {
             }
             index = 0;
 
-            System.out.println("Qual carta voce deseja jogar: ");
+            System.out.println("Qual carta você deseja jogar: ");
             int choose = scanner.nextInt();
 
 
@@ -105,29 +105,23 @@ public class Round {
         }
     }
     public void gameAlgorithm(Player player1, Player player2, Board board1, Board board2){
+
+        //embaralha as cartas que irao para a mao de forma aleatoria (10 cartas)
+        player1.shuffle(player1.getDeck(), player1.getHand());
+        player2.shuffle(player2.getDeck(), player2.getHand());
+
+        ArrayList<Card> player1Hand = player1.getHand();
+        ArrayList<Card> player2Hand = player2.getHand();
+
         if(roundNumber == 1){
-
-            //embaralha as cartas que irao para a mao de forma aleatoria (10 cartas)
-            player1.shuffle(player1.getDeck(), player1.getHand());
-            player2.shuffle(player2.getDeck(), player2.getHand());
-
-            ArrayList<Card> player1Hand = player1.getHand();
-            ArrayList<Card> player2Hand = player2.getHand();
 
             roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
         }
         else if(roundNumber == 2){
             //cotninuacao
-
-            ArrayList<Card> player1Hand = player1.getHand();
-            ArrayList<Card> player2Hand = player2.getHand();
-
             roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
         }
         else if(roundNumber == 3 && (player1.getHp() !=0 || player2.getHp() !=0)){
-
-            ArrayList<Card> player1Hand = player1.getHand();
-            ArrayList<Card> player2Hand = player2.getHand();
 
             roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
         }
