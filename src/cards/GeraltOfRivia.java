@@ -3,9 +3,9 @@ package cards;
 public class GeraltOfRivia extends Card {
     private String abilitie;
 
-    public GeraltOfRivia(int damage, String name, String type, String abilitie){
-        super(damage, name, type); // Herda da superclasse 'Card'.
-        this.abilitie = abilitie;
+    public GeraltOfRivia(){
+        super(15, "Geralt of Rivia", "Infantry"); // Herda da superclasse 'Card'.
+        this.abilitie = "Kill up to 10";
     }
 
     public void setAbilitie(String abilitie){
