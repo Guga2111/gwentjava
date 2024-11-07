@@ -16,6 +16,18 @@ public class Main {
         player.setDeck(deck);
     }
 
+    private static void gameInterface(){
+
+        System.out.println("=== Bem-vindo ao Jogo de Cartas! ===");
+        System.out.println("1 - Criar seu deck");
+        System.out.println("2 - Editar seu deck");
+        System.out.println("3 - Iniciar partida");
+        System.out.println("4 - Ver histórico de partidas");
+        System.out.println("5 - Sair");
+        System.out.print("Escolha uma opção: ");
+
+    }
+
     public static void main(String[] args) {
 
 
