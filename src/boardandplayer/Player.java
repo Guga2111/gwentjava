@@ -3,8 +3,11 @@ package boardandplayer;
 import cards.Card;
 import rounds.Plays;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.security.MessageDigest;
+
 
 public class Player {
     //vida do jogador
@@ -17,8 +20,22 @@ public class Player {
     private ArrayList<Card> hand = new ArrayList<Card>();
 
     private boolean continueMove = true;
+    //email do jogador
+    private String email;
+    //senha do jogador (armezanda como hash)
+    private String passwordHash;
 
-    private Plays plays;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.passwordHash = hashPassword(password);
+    }
 
     public Player(){
         deck = new ArrayList<Card>();
@@ -55,6 +72,27 @@ public class Player {
     public void setContinueMove(boolean continueMove) {
         this.continueMove = continueMove;
     }
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Erro ao calcular o hash da senha", e);
+        }
+    }
+
+    public boolean checkPassword(String password) {
+        return hashPassword(password).equals(this.passwordHash);
+    }
+
 
     public void shuffle(ArrayList<Card> deck, ArrayList<Card> hand){
         //criacao de objeto para randomizar
