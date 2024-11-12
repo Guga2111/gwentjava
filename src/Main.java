@@ -1,5 +1,9 @@
 import boardandplayer.Player;
 import cards.Card;
+import cards.GeraltOfRivia;
+import cards.Letho;
+import cards.Nilfgaard.*;
+import cards.Triss;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -43,7 +47,7 @@ public class Main {
             if(playerList.get(i).getEmail().equals(emailAnswer) && playerList.get(i).checkPassword(passwordAnswer)){
                 // entra no jogo ( ou seja na interface interativa de criar deck etc)
 
-                gameInteraction(i);
+                gameInteraction(playerList,i);
             }
 
         }
@@ -51,7 +55,7 @@ public class Main {
 
     }
 
-    public static void gameInteraction(int playerIdentifier){
+    public static void gameInteraction(ArrayList<Player> playerList, int playerIdentifier){
 
         gameInterface();
 
@@ -59,9 +63,29 @@ public class Main {
 
         switch(choose){
             case 1:
-                createDeck();
+                Player player = playerList.get(playerIdentifier);
+                createListOfCards(player);
+                createDeck(player.getOwnedCards(), player);
         }
 
+    }
+
+    public static void createListOfCards(Player player){
+
+        ArrayList<Card> cardList = new ArrayList<>();
+        cardList.add(new GeraltOfRivia());
+        cardList.add(new Assire());
+        cardList.add(new BlackArcher1());
+        cardList.add(new BlackArcher2());
+        cardList.add(new Fringilla());
+        cardList.add(new Sweers());
+        cardList.add(new ZerrikanianScorpion());
+        cardList.add(new SiegeEngineer());
+        cardList.add(new Manganela());
+        cardList.add(new Letho());
+        cardList.add(new Triss());
+
+        player.setOwnedCards(cardList);
     }
     public static void main(String[] args) {
 
