@@ -19,6 +19,7 @@ public class Player {
     //mao do jogador
     private ArrayList<Card> hand = new ArrayList<Card>();
 
+    private ArrayList<Card> ownedCards = new ArrayList<>();
     private boolean continueMove = true;
     //email do jogador
     private String email;
@@ -73,6 +74,14 @@ public class Player {
         this.continueMove = continueMove;
     }
 
+    public ArrayList<Card> getOwnedCards() {
+        return ownedCards;
+    }
+
+    public void setOwnedCards(ArrayList<Card> ownedCards) {
+        this.ownedCards = ownedCards;
+    }
+
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -92,7 +101,6 @@ public class Player {
     public boolean checkPassword(String password) {
         return hashPassword(password).equals(this.passwordHash);
     }
-
 
     public void shuffle(ArrayList<Card> deck, ArrayList<Card> hand){
         //criacao de objeto para randomizar
