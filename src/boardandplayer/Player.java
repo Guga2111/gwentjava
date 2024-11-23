@@ -124,4 +124,14 @@ public class Player {
 
         }
     }
+
+    public void addCard(Card card){
+
+        deck.add(card);
+    }
+
+    public void removeCard(Card card){
+
+        deck.remove(card);
+    }
 }

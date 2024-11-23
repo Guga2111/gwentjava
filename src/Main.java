@@ -17,11 +17,11 @@ public class Main {
     private static void gameInterface(){
 
         System.out.println("=== Bem-vindo ao Gwent! ===");
-        System.out.println("1 - Criar seu deck");
-        System.out.println("2 - Editar seu deck");
-        System.out.println("3 - Iniciar partida");
-        System.out.println("4 - Ver histórico de partidas");
-        System.out.println("0 - Sair");
+        System.out.println("1. Criar seu deck");
+        System.out.println("2. Editar seu deck");
+        System.out.println("3. Iniciar partida");
+        System.out.println("4. Ver histórico de partidas");
+        System.out.println("0. Sair");
         System.out.print("Escolha uma opção: ");
 
     }
@@ -37,23 +37,59 @@ public class Main {
         player.setDeck(deck);
     }
 
+    public static void createListOfCards(Player player){
+
+        ArrayList<Card> cardList = new ArrayList<>();
+        cardList.add(new GeraltOfRivia());
+        cardList.add(new Assire());
+        cardList.add(new BlackArcher1());
+        cardList.add(new BlackArcher2());
+        cardList.add(new Fringilla());
+        cardList.add(new Sweers());
+        cardList.add(new ZerrikanianScorpion());
+        cardList.add(new SiegeEngineer());
+        cardList.add(new Manganela());
+        cardList.add(new Letho());
+        cardList.add(new Triss());
+
+        player.setOwnedCards(cardList);
+    }
+
+    public static void updateDeck(Player player){
+        System.out.println("===Escolha!===");
+        System.out.println("1. Adicionar carta!");
+        System.out.println("2. Remover carta!");
+        int choose = scanner.nextInt();
+
+        switch(choose){
+            case 1:
+                int index = 1;
+                for(Card card : player.getOwnedCards()){
+                    System.out.println(index + ". " + card.toString());
+                }
+                int cardChoice = scanner.nextInt();
+
+                //player.addCard();
+        }
+    }
+
     private static void userLogin(ArrayList<Player> playerList){
 
         System.out.println("=== Escreva seu email: ===");
+        scanner.nextLine();
         String emailAnswer = scanner.nextLine();
+
+        System.out.println();
 
         System.out.println("===Escreva sua senha: ===");
         String passwordAnswer = scanner.nextLine();
 
-        for(int i = 0; i < playerList.size(); i++){
+        for(int i = 0; i< playerList.size(); i++){
             if(playerList.get(i).getEmail().equals(emailAnswer) && playerList.get(i).checkPassword(passwordAnswer)){
                 // entra no jogo ( ou seja na interface interativa de criar deck etc)
-
                 gameInteraction(playerList,i);
             }
-
         }
-
 
     }
 
@@ -82,30 +118,13 @@ public class Main {
 
     }
 
-    public static void createListOfCards(Player player){
-
-        ArrayList<Card> cardList = new ArrayList<>();
-        cardList.add(new GeraltOfRivia());
-        cardList.add(new Assire());
-        cardList.add(new BlackArcher1());
-        cardList.add(new BlackArcher2());
-        cardList.add(new Fringilla());
-        cardList.add(new Sweers());
-        cardList.add(new ZerrikanianScorpion());
-        cardList.add(new SiegeEngineer());
-        cardList.add(new Manganela());
-        cardList.add(new Letho());
-        cardList.add(new Triss());
-
-        player.setOwnedCards(cardList);
-    }
     public static void main(String[] args) {
 
         ArrayList<Player> playerList = new ArrayList<>();
 
         System.out.println("=== Bem-vindo ao Gwent!===");
-        System.out.println("1 - Registrar sua conta.");
-        System.out.println("2 - Fazer o login.");
+        System.out.println("1. Registrar sua conta.");
+        System.out.println("2. Fazer o login.");
 
         int choose = scanner.nextInt();
 
