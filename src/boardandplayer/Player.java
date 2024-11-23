@@ -26,6 +26,16 @@ public class Player {
     //senha do jogador (armezanda como hash)
     private String passwordHash;
 
+    private Board board;
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
     public String getEmail() {
         return email;
     }

@@ -4,6 +4,8 @@ import cards.GeraltOfRivia;
 import cards.Letho;
 import cards.Nilfgaard.*;
 import cards.Triss;
+import rounds.Round;
+import boardandplayer.Board;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,7 +21,7 @@ public class Main {
         System.out.println("2 - Editar seu deck");
         System.out.println("3 - Iniciar partida");
         System.out.println("4 - Ver histórico de partidas");
-        System.out.println("5 - Sair");
+        System.out.println("0 - Sair");
         System.out.print("Escolha uma opção: ");
 
     }
@@ -61,11 +63,21 @@ public class Main {
 
         int choose = scanner.nextInt();
 
+        Player player = playerList.get(playerIdentifier);
+        Round round = new Round();
+        Player bot = playerList.getFirst(); // o bot ficara armezanado na lista de players na posição '0'.
+
         switch(choose){
             case 1:
-                Player player = playerList.get(playerIdentifier);
                 createListOfCards(player);
                 createDeck(player.getOwnedCards(), player);
+                break;
+            case 2:
+                //adicionar ou remover cartas!
+                break;
+            case 3:
+                round.gameAlgorithm(player, bot, player.getBoard(), bot.getBoard());
+                break;
         }
 
     }

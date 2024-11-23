@@ -26,7 +26,11 @@ public class Round {
     }
 
     //logica de verificação de quem ganhou o round
-    private void verifyPoints(Player player1, Player player2, Board board1, Board board2) {
+    private void verifyPoints(Player player1, Player player2) {
+
+        Board board1 = player1.getBoard();
+        Board board2 = player2.getBoard();
+
         if(board1.getPoints() > board2.getPoints()){
             player2.setHp(player2.getHp() - 1);
         }
@@ -40,7 +44,10 @@ public class Round {
         roundNumber++;
     }
 
-    private void playLogic(Player player, Board board, ArrayList<Card> playerHand) {
+    private void playLogic(Player player) {
+
+        ArrayList<Card> playerHand = player.getHand();
+        Board board = player.getBoard();
 
         //basicamente verificaçao se o jogador deseja continuar jogando suas cartas ou nao naquela rodada.
         System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
@@ -86,21 +93,21 @@ public class Round {
         if(head_tails == 0){ // player 1 comeca
             while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
-                playLogic(player1, board1, player1Hand);
-                playLogic(player2, board2, player2Hand);
+                playLogic(player1, player1.getBoard(), player1.getHand());
+                playLogic(player2, player2.getBoard(), player2.getHand());
 
             }
-            verifyPoints(player1, player2, board1, board2);
+            verifyPoints(player1, player2, player1.getBoard(), player2.getBoard());
 
         }
         else if(head_tails == 1){ //player 2 comeca
             while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
-                playLogic(player2, board2, player2Hand);
-                playLogic(player1, board1, player1Hand);
+                playLogic(player2, player2.getBoard(), player2.getHand());
+                playLogic(player1, player1.getBoard(), player1.getHand());
 
             }
-            verifyPoints(player1, player2, board1, board2);
+            verifyPoints(player1, player2, player1.getBoard(), player2.getBoard());
 
         }
     }
