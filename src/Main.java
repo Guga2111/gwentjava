@@ -26,6 +26,12 @@ public class Main {
 
     }
 
+    private static void updateInterface(){
+        System.out.println("===Escolha!===");
+        System.out.println("1. Adicionar carta!");
+        System.out.println("2. Remover carta!");
+    }
+
     public static void createDeck(ArrayList<Card> listOfCards, Player player){ //parametro tem que ser uma lista de cartas (arraylist com varias cartas)
 
         ArrayList<Card> deck = new ArrayList<Card>();
@@ -56,12 +62,12 @@ public class Main {
     }
 
     public static void updateDeck(Player player){
-        System.out.println("===Escolha!===");
-        System.out.println("1. Adicionar carta!");
-        System.out.println("2. Remover carta!");
+
+        updateInterface();
         int choose = scanner.nextInt();
 
         switch(choose){
+            // adição de cartas
             case 1:
                 int index = 1;
                 for(Card card : player.getOwnedCards()){
@@ -70,8 +76,15 @@ public class Main {
                 int cardChoice = scanner.nextInt();
                 player.addCard(player.getOwnedCards().get(cardChoice-1));
                 break;
+            // remoção de cartas
             case 2:
-
+                int index2 = 1;
+                for(Card card : player.getDeck()){
+                    System.out.println(index2 + ". " + card.toString());
+                }
+                int cardChoice2 = scanner.nextInt();
+                player.removeCard(player.getDeck().get(cardChoice2-1));
+                break;
         }
     }
 
@@ -112,6 +125,7 @@ public class Main {
                 break;
             case 2:
                 //adicionar ou remover cartas!
+                updateDeck(player);
                 break;
             case 3:
                 round.gameAlgorithm(player, bot);
