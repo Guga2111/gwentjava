@@ -108,6 +108,11 @@ public class Main {
 
     }
 
+    private static void userRegister(ArrayList<Player> playerList){
+
+
+    }
+
     public static void gameInteraction(ArrayList<Player> playerList, int playerIdentifier){
 
         gameInterface();
