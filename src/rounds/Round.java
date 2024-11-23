@@ -85,7 +85,7 @@ public class Round {
 
     }
 
-    private void roundLogic(Player player1, Player player2, Board board1, Board board2, ArrayList<Card> player1Hand, ArrayList<Card> player2Hand){
+    private void roundLogic(Player player1, Player player2){
 
         Random random = new Random();
         int head_tails = random.nextInt(2);
@@ -93,44 +93,41 @@ public class Round {
         if(head_tails == 0){ // player 1 comeca
             while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
-                playLogic(player1, player1.getBoard(), player1.getHand());
-                playLogic(player2, player2.getBoard(), player2.getHand());
+                playLogic(player1);
+                playLogic(player2);
 
             }
-            verifyPoints(player1, player2, player1.getBoard(), player2.getBoard());
+            verifyPoints(player1, player2);
 
         }
         else if(head_tails == 1){ //player 2 comeca
             while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){ // falta adicionar se o booleano vai ser true ou false para logica de passar o round ou nao
 
-                playLogic(player2, player2.getBoard(), player2.getHand());
-                playLogic(player1, player1.getBoard(), player1.getHand());
+                playLogic(player2);
+                playLogic(player1);
 
             }
-            verifyPoints(player1, player2, player1.getBoard(), player2.getBoard());
+            verifyPoints(player1, player2);
 
         }
     }
-    public void gameAlgorithm(Player player1, Player player2, Board board1, Board board2){
+    public void gameAlgorithm(Player player1, Player player2){
 
         //embaralha as cartas que irao para a mao de forma aleatoria (10 cartas)
         player1.shuffle(player1.getDeck(), player1.getHand());
         player2.shuffle(player2.getDeck(), player2.getHand());
 
-        ArrayList<Card> player1Hand = player1.getHand();
-        ArrayList<Card> player2Hand = player2.getHand();
-
         if(roundNumber == 1){
 
-            roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
+            roundLogic(player1, player2);
         }
         else if(roundNumber == 2){
             //cotninuacao
-            roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
+            roundLogic(player1, player2);
         }
         else if(roundNumber == 3 && (player1.getHp() !=0 || player2.getHp() !=0)){
 
-            roundLogic(player1, player2, board1, board2, player1Hand, player2Hand);
+            roundLogic(player1, player2);
         }
         else{
             System.out.println("The game is over!");

@@ -76,7 +76,7 @@ public class Main {
                 //adicionar ou remover cartas!
                 break;
             case 3:
-                round.gameAlgorithm(player, bot, player.getBoard(), bot.getBoard());
+                round.gameAlgorithm(player, bot);
                 break;
         }
 
