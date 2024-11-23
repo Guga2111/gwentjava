@@ -68,8 +68,10 @@ public class Main {
                     System.out.println(index + ". " + card.toString());
                 }
                 int cardChoice = scanner.nextInt();
+                player.addCard(player.getOwnedCards().get(cardChoice-1));
+                break;
+            case 2:
 
-                //player.addCard();
         }
     }
 
