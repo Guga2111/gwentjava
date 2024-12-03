@@ -15,7 +15,6 @@ public class Main {
     public static final Scanner scanner = new Scanner(System.in);
 
     private static void gameInterface(){
-
         System.out.println("=== Bem-vindo ao Gwent! ===");
         System.out.println("1. Criar seu deck");
         System.out.println("2. Editar seu deck");
@@ -23,7 +22,6 @@ public class Main {
         System.out.println("4. Ver histórico de partidas");
         System.out.println("0. Sair");
         System.out.print("Escolha uma opção: ");
-
     }
 
     private static void updateInterface(){
@@ -32,10 +30,11 @@ public class Main {
         System.out.println("2. Remover carta!");
     }
 
-    public static void createDeck(ArrayList<Card> listOfCards, Player player){ //parametro tem que ser uma lista de cartas (arraylist com varias cartas)
+    public static void createDeck(ArrayList<Card> listOfCards, Player player){
 
         ArrayList<Card> deck = new ArrayList<Card>();
 
+        // rever algum conceito do java para facilitar essa implementacao
         for(Card card : listOfCards){
             deck.add(card);
         }
@@ -101,7 +100,6 @@ public class Main {
 
         for(int i = 0; i< playerList.size(); i++){
             if(playerList.get(i).getEmail().equals(emailAnswer) && playerList.get(i).checkPassword(passwordAnswer)){
-                // entra no jogo ( ou seja na interface interativa de criar deck etc)
                 gameInteraction(playerList,i);
             }
         }
@@ -129,7 +127,6 @@ public class Main {
                 createDeck(player.getOwnedCards(), player);
                 break;
             case 2:
-                //adicionar ou remover cartas!
                 updateDeck(player);
                 break;
             case 3:

@@ -5,26 +5,15 @@ import cards.Card;
 import java.util.ArrayList;
 
 public class Board {
-    //cartas que o jogador possui na mao
-    //private ArrayList<Card> hand;
-
-    //cartas no campo
     private ArrayList<Card> infantry;
     private ArrayList<Card> artillary;
     private ArrayList<Card> siege;
-
-    //pontos de cada campo
     private int infantry_points = 0;
     private int artillary_points = 0;
     private int siege_points = 0;
-
-    //pontos da rodada (do jogador)
     private int points = 0;
 
     public Board(){
-        //construtor da mao do jogador
-
-        //construtor dos campos de batalha
         this.infantry = new ArrayList<>();
         this.artillary = new ArrayList<>();
         this.siege = new ArrayList<>();
@@ -104,22 +93,21 @@ public class Board {
         }
     }
 
+    // tlvz seja interessante utilizar switch case!
+    // utilizar essa function para adicionar pontos dependendo do tipo de carta
     public void addPoints(Card card, String card_type){
 
         int points = card.getPoints();
 
         if(card_type.equals("infantry") || card_type.equals("Infantry")){
-
             infantry_points = infantry_points + points;
             this.points = this.points + points;
         }
         else if(card_type.equals("artillary") || card_type.equals("Artillary")){
-
             artillary_points = artillary_points + points;
             this.points = this.points + points;
         }
         else if(card_type.equals("siege") || card_type.equals("Siege")){
-
             siege_points = siege_points + points;
             this.points = this.points + points;
         }
