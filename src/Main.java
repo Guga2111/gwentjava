@@ -108,6 +108,38 @@ public class Main {
 
     private static void userRegister(ArrayList<Player> playerList){
 
+        boolean verifyEmail = true;
+
+        while(verifyEmail) {
+
+            System.out.println("===Escreva seu email: ===");
+            scanner.nextLine();
+            String emailRegister = scanner.nextLine();
+
+            for (Player player : playerList) {
+                if (emailRegister.equals(player.getEmail())) {
+                    System.out.println("Email ja registrado... tente novamente!");
+                    verifyEmail = true;
+                    break;
+                }
+            }
+
+            if(!verifyEmail) {
+                System.out.println("Email disponível continue com o registro!");
+                System.out.println("===Digite sua senha: ===");
+                scanner.nextLine();
+                String passwordRegister = scanner.nextLine();
+
+                Player newPlayer = new Player();
+                newPlayer.setEmail(emailRegister);
+                newPlayer.setPassword(passwordRegister);
+                playerList.add(newPlayer);
+
+                System.out.println("Registro concluído com sucesso!");
+                verifyEmail = false;
+            }
+
+        }
 
     }
 

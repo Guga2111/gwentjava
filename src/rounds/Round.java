@@ -6,6 +6,7 @@ import cards.Card;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -49,8 +50,8 @@ public class Round {
         Board board = player.getBoard();
 
         System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
-        char choice = scanner.next().charAt(0);
-        if(choice == 'S') {
+        String choice = scanner.nextLine();
+        if(Arrays.asList(Constants.ANSWERS).contains(choice)) {
             player.setContinueMove(false);
         }
         else{
@@ -58,7 +59,7 @@ public class Round {
 
             int index = 0;
 
-            for(int i = 0 ; i < player.getHand().size() ; i++){
+            for(int i = 0; i < player.getHand().size(); i++) {
                 index++;
                 System.out.println(index + ". " + player.getHand().get(i).getName());
             }
@@ -66,15 +67,13 @@ public class Round {
             System.out.println("Qual carta você deseja jogar: ");
             int choose = scanner.nextInt();
 
-            for(int i = 0 ; i < player.getHand().size(); i++){
-                if(playerHand.get(i) == playerHand.get(choose)){
+            for(int i = 0 ; i < player.getHand().size(); i++) {
+                if(playerHand.get(i) == playerHand.get(choose)) {
                     board.addCard(playerHand.get(choose), playerHand.get(choose).getType());
                     playerHand.remove(choose);
                 }
-
             }
         }
-
     }
 
     // ver alguns conceitos DRY ( don't repeat yourself ) nessa function, tlvz seja tambem interessante utilizar switch case!
@@ -90,7 +89,7 @@ public class Round {
             }
             verifyPoints(player1, player2);
         }
-        else if(head_tails == 1){ //player 2 comeca
+        else{ //player 2 comeca
             while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
                 playLogic(player2);
                 playLogic(player1);

@@ -81,12 +81,15 @@ public class Board {
 
         if(card_type.equals("infantry") || card_type.equals("Infantry")){
             infantry.add(card);
+            addPoints(card, card_type);
         }
         else if(card_type.equals("artillary") || card_type.equals("Artillary")){
             artillary.add(card);
+            addPoints(card, card_type);
         }
         else if(card_type.equals("siege") || card_type.equals("Siege")){
             siege.add(card);
+            addPoints(card, card_type);
         }
         else{
             System.out.println("Card type not recognized");
