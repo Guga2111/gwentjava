@@ -18,8 +18,8 @@ public class Main {
         System.out.println("=== Bem-vindo ao Gwent! ===");
         System.out.println("1. Criar seu deck");
         System.out.println("2. Editar seu deck");
-        System.out.println("3. Iniciar partida");
-        System.out.println("4. Ver histórico de partidas");
+        System.out.println("3. Iniciar partida com Bot");
+        System.out.println("4. Iniciar partida com Outro player");
         System.out.println("0. Sair");
         System.out.print("Escolha uma opção: ");
     }
@@ -124,10 +124,11 @@ public class Main {
                 }
             }
 
+            verifyEmail = false;
+
             if(!verifyEmail) {
                 System.out.println("Email disponível continue com o registro!");
                 System.out.println("===Digite sua senha: ===");
-                scanner.nextLine();
                 String passwordRegister = scanner.nextLine();
 
                 Player newPlayer = new Player();
@@ -171,18 +172,31 @@ public class Main {
     public static void main(String[] args) {
 
         ArrayList<Player> playerList = new ArrayList<>();
+        boolean running = true;
 
-        System.out.println("=== Bem-vindo ao Gwent!===");
-        System.out.println("1. Registrar sua conta.");
-        System.out.println("2. Fazer o login.");
+        while(running) {
+            System.out.println("=== Bem-vindo ao Gwent!===");
+            System.out.println("1. Registrar sua conta.");
+            System.out.println("2. Fazer o login.");
+            System.out.println("0. Sair do Game.");
 
-        int choose = scanner.nextInt();
+            int choose = scanner.nextInt();
 
-        switch(choose){
-            case 1:
-
-            case 2:
-                userLogin(playerList);
+            switch(choose){
+                case 1:
+                    userRegister(playerList);
+                    break;
+                case 2:
+                    userLogin(playerList);
+                    break;
+                case 0:
+                    System.out.println("Exiting the game!");
+                    running = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
 }
