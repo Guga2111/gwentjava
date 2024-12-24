@@ -146,25 +146,35 @@ public class Main {
 
     public static void gameInteraction(ArrayList<Player> playerList, int playerIdentifier){
 
-        gameInterface();
-
-        int choose = scanner.nextInt();
-
+        boolean running = true;
         Player player = playerList.get(playerIdentifier);
-        Round round = new Round();
         Player bot = playerList.getFirst(); // o bot ficara armezanado na lista de players na posição '0'.
+        Round round = new Round();
 
-        switch(choose){
-            case 1:
-                createListOfCards(player);
-                createDeck(player.getOwnedCards(), player);
-                break;
-            case 2:
-                updateDeck(player);
-                break;
-            case 3:
-                round.gameAlgorithm(player, bot);
-                break;
+        while(running) {
+
+            gameInterface();
+
+            int choose = scanner.nextInt();
+
+            switch(choose){
+                case 1:
+                    createListOfCards(player);
+                    createDeck(player.getOwnedCards(), player);
+                    break;
+                case 2:
+                    updateDeck(player);
+                    break;
+                case 3:
+                    round.gameAlgorithm(player, bot);
+                    break;
+                case 0:
+                    System.out.println("Goodbye " + player.getEmail());
+                    running = false;
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
