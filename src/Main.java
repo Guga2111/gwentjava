@@ -68,15 +68,26 @@ public class Main {
         switch(choose){
             // adição de cartas
             case 1:
+
+                if(player.getOwnedCards().isEmpty()) {
+                    break;
+                }
+
                 int index = 1;
                 for(Card card : player.getOwnedCards()){
-                    System.out.println(index + ". " + card.toString());
+                    System.out.println(index + ". " + card.getName());
+                    index++;
                 }
                 int cardChoice = scanner.nextInt();
                 player.addCard(player.getOwnedCards().get(cardChoice-1));
                 break;
             // remoção de cartas
             case 2:
+
+                if(player.getOwnedCards().isEmpty()) {
+                    break;
+                }
+
                 int index2 = 1;
                 for(Card card : player.getDeck()){
                     System.out.println(index2 + ". " + card.toString());
@@ -150,6 +161,10 @@ public class Main {
         Player player = playerList.get(playerIdentifier);
         Player bot = playerList.getFirst(); // o bot ficara armezanado na lista de players na posição '0'.
         Round round = new Round();
+        Board boardPlayer = new Board();
+        Board boardBot = new Board();
+        player.setBoard(boardPlayer);
+        bot.setBoard(boardBot);
 
         while(running) {
 
