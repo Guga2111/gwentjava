@@ -51,23 +51,26 @@ public class Round {
 
         System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
         String choice = scanner.nextLine();
+        scanner.nextLine();
+
         if(Arrays.asList(Constants.ANSWERS).contains(choice)) {
             player.setContinueMove(false);
         }
         else{
             player.setContinueMove(true);
 
-            int index = 0;
+            int index = 1;
 
-            for(int i = 0; i < player.getHand().size(); i++) {
+            for(int i = 0; i < playerHand.size(); i++) {
+                System.out.println(index + ". " + playerHand.get(i).getName());
                 index++;
-                System.out.println(index + ". " + player.getHand().get(i).getName());
             }
 
             System.out.println("Qual carta você deseja jogar: ");
             int choose = scanner.nextInt();
+            choose--;
 
-            for(int i = 0 ; i < player.getHand().size(); i++) {
+            for(int i = 0 ; i < playerHand.size(); i++) {
                 if(playerHand.get(i) == playerHand.get(choose)) {
                     board.addCard(playerHand.get(choose), playerHand.get(choose).getType());
                     playerHand.remove(choose);
@@ -76,25 +79,24 @@ public class Round {
         }
     }
 
-    // ver alguns conceitos DRY ( don't repeat yourself ) nessa function, tlvz seja tambem interessante utilizar switch case!
     private void roundLogic(Player player1, Player player2){
 
         Random random = new Random();
         int head_tails = random.nextInt(2);
 
-        if(head_tails == 0){ // player 1 comeca
-            while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
-                playLogic(player1);
-                playLogic(player2);
-            }
-            verifyPoints(player1, player2);
-        }
-        else{ //player 2 comeca
-            while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
-                playLogic(player2);
-                playLogic(player1);
-            }
-            verifyPoints(player1, player2);
+        switch(head_tails) {
+            case 0:
+                while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
+                    playLogic(player1);
+                    playLogic(player2);
+                }
+                verifyPoints(player1, player2);
+            case 1:
+                while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
+                    playLogic(player2);
+                    playLogic(player1);
+                }
+                verifyPoints(player1, player2);
         }
     }
     public void gameAlgorithm(Player player1, Player player2){
