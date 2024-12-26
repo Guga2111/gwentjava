@@ -81,19 +81,26 @@ public class Round {
 
     private void roundLogic(Player player1, Player player2){
 
+        Board board1 = player1.getBoard();
+        Board board2 = player2.getBoard();
+
         Random random = new Random();
         int head_tails = random.nextInt(2);
 
         switch(head_tails) {
             case 0:
                 while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
+                    board1.showBoard(player1, player2);
                     playLogic(player1);
+                    board2.showBoard(player1, player2);
                     playLogic(player2);
                 }
                 verifyPoints(player1, player2);
             case 1:
                 while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
+                    board1.showBoard(player1, player2);
                     playLogic(player2);
+                    board2.showBoard(player1, player2);
                     playLogic(player1);
                 }
                 verifyPoints(player1, player2);

@@ -9,23 +9,25 @@ import java.security.MessageDigest;
 
 
 public class Player {
-    //vida do jogador
+
+    private String name;
     private int hp = 2;
-
-    //deck do jogador // no maximo 40 cartas!
     private ArrayList<Card> deck = new ArrayList<Card>();
-
-    //mao do jogador
     private ArrayList<Card> hand = new ArrayList<Card>();
-
     private ArrayList<Card> ownedCards = new ArrayList<>();
     private boolean continueMove = true;
-    //email do jogador
     private String email;
     //senha do jogador (armezanda como hash)
     private String passwordHash;
-
     private Board board;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Board getBoard() {
         return board;

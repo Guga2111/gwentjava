@@ -165,6 +165,8 @@ public class Main {
         Board boardBot = new Board();
         player.setBoard(boardPlayer);
         bot.setBoard(boardBot);
+        bot.setName("BOT");
+        player.setName("Guga");
 
         while(running) {
 
