@@ -120,23 +120,23 @@ public class Board {
     public void showBoard(Player player1, Player player2) {
 
         Board board1 = player1.getBoard();
-        Board board2 = player1.getBoard();
+        Board board2 = player2.getBoard();
 
-        System.out.println("=== " + board1.getPoints() + "===");
+        System.out.println("=== " + board2.getPoints() + "===");
         System.out.println("===" + player2.getName() + "===");
 
-        System.out.println("SIEGE: " + board1.getSiege_points() + " pts.");
-        System.out.println("ARTILLARY: " + board1.getArtillary_points() + " pts.");
-        System.out.println("INFANTRY: " + board1.getInfantry_points() + " pts.");
+        System.out.println("SIEGE: " + board2.getSiege_points() + " pts.");
+        System.out.println("ARTILLARY: " + board2.getArtillary_points() + " pts.");
+        System.out.println("INFANTRY: " + board2.getInfantry_points() + " pts.");
 
         System.out.println("-----*------*------*------*------");
 
-        System.out.println("INFANTRY: " + board2.getInfantry_points() + " pts.");
-        System.out.println("ARTILLARY: " + board2.getArtillary_points() + " pts.");
+        System.out.println("INFANTRY: " + board1.getInfantry_points() + " pts.");
+        System.out.println("ARTILLARY: " + board1.getArtillary_points() + " pts.");
         System.out.println("SIEGE: " + board1.getSiege_points() + " pts.");
 
         System.out.println("===" + player1.getName() + "===");
-        System.out.println("=== " + board2.getPoints() + "===");
+        System.out.println("=== " + board1.getPoints() + "===");
     }
 
 }
