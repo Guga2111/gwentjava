@@ -79,33 +79,31 @@ public class Round {
         }
     }
 
-    private void roundLogic(Player player1, Player player2){
-
-        Board board1 = player1.getBoard();
-        Board board2 = player2.getBoard();
-
+    private void roundLogic(Player player1, Player player2) {
         Random random = new Random();
         int head_tails = random.nextInt(2);
 
-        switch(head_tails) {
-            case 0:
-                while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
-                    board1.showBoard(player1, player2);
-                    playLogic(player1);
-                    board2.showBoard(player1, player2);
-                    playLogic(player2);
-                }
-                verifyPoints(player1, player2);
-            case 1:
-                while(player1.getHp() != 0 && player2.getHp() != 0 && (player1.isContinueMove() || player2.isContinueMove())){
-                    board1.showBoard(player1, player2);
-                    playLogic(player2);
-                    board2.showBoard(player1, player2);
-                    playLogic(player1);
-                }
-                verifyPoints(player1, player2);
+        Player firstPlayer = (head_tails == 0) ? player1 : player2;
+        Player secondPlayer = (head_tails == 0) ? player2 : player1;
+
+        System.out.println("O jogador inicial será: " + (head_tails == 0 ? "Player 1" : "Player 2"));
+
+        while (player1.getHp() > 0 && player2.getHp() > 0 && (player1.isContinueMove() || player2.isContinueMove())) {
+
+            firstPlayer.getBoard().showBoard(player1, player2);
+            playLogic(firstPlayer);
+
+            if (player1.getHp() <= 0 || player2.getHp() <= 0) {
+                break;
+            }
+
+            secondPlayer.getBoard().showBoard(player1, player2);
+            playLogic(secondPlayer);
         }
+
+        verifyPoints(player1, player2);
     }
+
     public void gameAlgorithm(Player player1, Player player2){
 
         player1.shuffle(player1.getDeck(), player1.getHand());
