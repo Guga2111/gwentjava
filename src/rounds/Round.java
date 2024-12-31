@@ -51,7 +51,6 @@ public class Round {
 
         System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
         String choice = scanner.nextLine();
-        scanner.nextLine();
 
         if(Arrays.asList(Constants.ANSWERS).contains(choice)) {
             player.setContinueMove(false);
@@ -67,7 +66,8 @@ public class Round {
             }
 
             System.out.println("Qual carta você deseja jogar: ");
-            int choose = scanner.nextInt();
+            String chooseString = scanner.nextLine();
+            int choose = Integer.parseInt(chooseString);
             choose--;
 
             for(int i = 0 ; i < playerHand.size(); i++) {
@@ -108,6 +108,16 @@ public class Round {
 
         player1.shuffle(player1.getDeck(), player1.getHand());
         player2.shuffle(player2.getDeck(), player2.getHand());
+
+        System.out.println("Player1: ");
+        for(Card card : player1.getHand()) {
+            System.out.println(card.getName());
+        }
+
+        System.out.println("Player2: ");
+        for(Card card : player2.getHand()) {
+            System.out.println(card.getName());
+        }
 
         if(roundNumber == 1){
             roundLogic(player1, player2);

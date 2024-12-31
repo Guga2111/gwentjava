@@ -32,10 +32,11 @@ public class Main {
 
     public static void createDeck(ArrayList<Card> listOfCards, Player player){
 
-        ArrayList<Card> deck = new ArrayList<Card>();
+        ArrayList<Card> deck = new ArrayList<>();
 
         // rever algum conceito do java para facilitar essa implementacao
         for(Card card : listOfCards){
+            System.out.println("carta implementada: " + card);
             deck.add(card);
         }
 
@@ -63,7 +64,8 @@ public class Main {
     public static void updateDeck(Player player){
 
         updateInterface();
-        int choose = scanner.nextInt();
+        String chooseString = scanner.nextLine();
+        int choose = Integer.parseInt(chooseString);
 
         switch(choose){
             // adição de cartas
@@ -101,7 +103,7 @@ public class Main {
     private static void userLogin(ArrayList<Player> playerList){
 
         System.out.println("=== Escreva seu email: ===");
-        scanner.nextLine();
+
         String emailAnswer = scanner.nextLine();
 
         System.out.println();
@@ -176,7 +178,8 @@ public class Main {
 
             gameInterface();
 
-            int choose = scanner.nextInt();
+            String chooseString = scanner.nextLine();
+            int choose = Integer.parseInt(chooseString);
 
             switch(choose){
                 case 1:
