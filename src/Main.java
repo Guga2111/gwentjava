@@ -124,17 +124,21 @@ public class Main {
         while(!verifyEmail) {
 
             System.out.println("===Escreva seu email: ===");
-            String emailRegister = scanner.nextLine();
 
+            String emailRegister = scanner.nextLine();
+            System.out.println("email: " + emailRegister);
+
+            boolean emailExists = false;
             for (Player player : playerList) {
                 if (emailRegister.equals(player.getEmail())) {
                     System.out.println("Email ja registrado... tente novamente!");
+                    emailExists = true;
                     break;
                 }
-                verifyEmail = true;
             }
 
-            if(verifyEmail) {
+            if(!emailExists) {
+                verifyEmail = true;
                 System.out.println("Email disponível continue com o registro!");
                 System.out.println("===Digite sua senha: ===");
                 String passwordRegister = scanner.nextLine();
@@ -218,7 +222,8 @@ public class Main {
             System.out.println("2. Fazer o login.");
             System.out.println("0. Sair do Game.");
 
-            int choose = scanner.nextInt();
+            String chooseString = scanner.nextLine();
+            int choose = Integer.parseInt(chooseString);
 
             switch(choose){
                 case 1:
