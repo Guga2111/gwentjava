@@ -119,25 +119,22 @@ public class Main {
 
     private static void userRegister(ArrayList<Player> playerList){
 
-        boolean verifyEmail = true;
+        boolean verifyEmail = false;
 
-        while(verifyEmail) {
+        while(!verifyEmail) {
 
             System.out.println("===Escreva seu email: ===");
-            scanner.nextLine();
             String emailRegister = scanner.nextLine();
 
             for (Player player : playerList) {
                 if (emailRegister.equals(player.getEmail())) {
                     System.out.println("Email ja registrado... tente novamente!");
-                    verifyEmail = true;
                     break;
                 }
+                verifyEmail = true;
             }
 
-            verifyEmail = false;
-
-            if(!verifyEmail) {
+            if(verifyEmail) {
                 System.out.println("Email disponível continue com o registro!");
                 System.out.println("===Digite sua senha: ===");
                 String passwordRegister = scanner.nextLine();
@@ -148,7 +145,6 @@ public class Main {
                 playerList.add(newPlayer);
 
                 System.out.println("Registro concluído com sucesso!");
-                verifyEmail = false;
             }
 
         }
@@ -160,11 +156,15 @@ public class Main {
         boolean running = true;
         Player player = playerList.get(playerIdentifier);
         Player bot = playerList.getFirst(); // o bot ficara armezanado na lista de players na posição '0'.
+
         Round round = new Round();
+
         Board boardPlayer = new Board();
         Board boardBot = new Board();
+
         player.setBoard(boardPlayer);
         bot.setBoard(boardBot);
+
         bot.setName("BOT");
         player.setName("Guga");
 
@@ -196,9 +196,20 @@ public class Main {
 
     }
 
+    public static void createBot(ArrayList<Player> players) {
+
+        Player bot = new Player();
+        bot.setEmail("bot@gmail.com");
+        bot.setPassword("123");
+
+        createListOfCards(bot);
+
+        players.add(bot);
+    }
     public static void main(String[] args) {
 
         ArrayList<Player> playerList = new ArrayList<>();
+        createBot(playerList);
         boolean running = true;
 
         while(running) {
