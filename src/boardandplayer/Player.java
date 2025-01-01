@@ -113,18 +113,18 @@ public class Player {
         return hashPassword(password).equals(this.passwordHash);
     }
 
-    public void shuffle(ArrayList<Card> deck, ArrayList<Card> hand) {
-        Random random = new Random();
-        System.out.println("tamanho do deck é: " + deck.size());
+        public void shuffle(ArrayList<Card> deck, ArrayList<Card> hand) {
+            Random random = new Random();
+            System.out.println("tamanho do deck é: " + deck.size());
 
-        while(hand.size() < 10 && !hand.isEmpty()){
-            System.out.println("Tamanho do deck é: "+ deck.size());
-            int randomNumber = random.nextInt(deck.size());
+            while(hand.size() < 10 && !deck.isEmpty()){
+                System.out.println("Tamanho do deck é: "+ deck.size());
+                int randomNumber = random.nextInt(deck.size());
 
-            hand.add(deck.get(randomNumber));
-            deck.remove(randomNumber);
+                hand.add(deck.get(randomNumber));
+                deck.remove(randomNumber);
+            }
         }
-    }
 
     public void addCard(Card card) {
 
