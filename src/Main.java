@@ -30,12 +30,13 @@ public class Main {
         System.out.println("2. Remover carta!");
     }
 
-    public static void createDeck(ArrayList<Card> listOfCards, Player player){
+    public static void createDeck(Player player){
 
         ArrayList<Card> deck = new ArrayList<>();
+        ArrayList<Card> ownedCards = player.getOwnedCards();
 
         // rever algum conceito do java para facilitar essa implementacao
-        for(Card card : listOfCards){
+        for(Card card : ownedCards){
             System.out.println("carta implementada: " + card);
             deck.add(card);
         }
@@ -184,7 +185,7 @@ public class Main {
             switch(choose){
                 case 1:
                     createListOfCards(player);
-                    createDeck(player.getOwnedCards(), player);
+                    createDeck(player);
                     break;
                 case 2:
                     updateDeck(player);
@@ -210,6 +211,8 @@ public class Main {
         bot.setPassword("123");
 
         createListOfCards(bot);
+
+        createDeck(bot);
 
         players.add(bot);
     }
