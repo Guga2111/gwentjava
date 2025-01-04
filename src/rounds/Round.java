@@ -49,6 +49,7 @@ public class Round {
             System.out.println("Ambos players empataram!");
         }
         roundNumber++;
+        System.out.println("Vamos para o round: " + roundNumber);
     }
 
     private void playLogic(Player player) {
@@ -93,19 +94,25 @@ public class Round {
         Player firstPlayer = (head_tails == 0) ? player1 : player2;
         Player secondPlayer = (head_tails == 0) ? player2 : player1;
 
-        System.out.println("O jogador inicial será: " + (head_tails == 0 ? "Player 1" : "Player 2"));
+        System.out.print("O jogador inicial será: " + (head_tails == 0 ? "Player 1" : "Player 2"));
+        System.out.println(" -> " + firstPlayer.getName());
 
         while (player1.getHp() > 0 && player2.getHp() > 0 && (player1.isContinueMove() || player2.isContinueMove())) {
 
-            firstPlayer.getBoard().showBoard(player1, player2);
-            playLogic(firstPlayer);
+            if(player1.isContinueMove()) {
+                firstPlayer.getBoard().showBoard(player1, player2);
+                playLogic(firstPlayer);
+            }
 
             if (player1.getHp() <= 0 || player2.getHp() <= 0) {
                 break;
             }
 
-            secondPlayer.getBoard().showBoard(player1, player2);
-            playLogic(secondPlayer);
+            if(player2.isContinueMove()) {
+                secondPlayer.getBoard().showBoard(player1, player2);
+                playLogic(secondPlayer);
+            }
+
         }
 
         verifyPoints(player1, player2);
