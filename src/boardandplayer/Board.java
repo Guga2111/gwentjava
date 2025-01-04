@@ -8,6 +8,7 @@ public class Board {
     private ArrayList<Card> infantry;
     private ArrayList<Card> artillary;
     private ArrayList<Card> siege;
+    private ArrayList<Card> discard;
     private int infantry_points = 0;
     private int artillary_points = 0;
     private int siege_points = 0;
@@ -17,6 +18,7 @@ public class Board {
         this.infantry = new ArrayList<>();
         this.artillary = new ArrayList<>();
         this.siege = new ArrayList<>();
+        this.discard = new ArrayList<>();
     }
 
     public int getInfantry_points() {
@@ -77,46 +79,78 @@ public class Board {
         this.points = points;
     }
 
-    public void addCard(Card card, String card_type){
+    public ArrayList<Card> getDiscard() {
+        return discard;
+    }
 
-        if(card_type.equals("infantry") || card_type.equals("Infantry")){
-            infantry.add(card);
-            addPoints(card, card_type);
-        }
-        else if(card_type.equals("artillary") || card_type.equals("Artillary")){
-            artillary.add(card);
-            addPoints(card, card_type);
-        }
-        else if(card_type.equals("siege") || card_type.equals("Siege")){
-            siege.add(card);
-            addPoints(card, card_type);
-        }
-        else{
-            System.out.println("Card type not recognized");
+    public void setDiscard(ArrayList<Card> discard) {
+        this.discard = discard;
+    }
+
+    public void addCard(Card card, String card_type) {
+
+        switch (card_type.toLowerCase()) {
+            case "infantry":
+                infantry.add(card);
+                addPoints(card, card_type.toLowerCase());
+                break;
+            case "artillary":
+                artillary.add(card);
+                addPoints(card, card_type.toLowerCase());
+                break;
+            case "siege":
+                siege.add(card);
+                addPoints(card, card_type.toLowerCase());
+                break;
+            default:
+                System.out.println("Card type not recognized");
+                break;
         }
     }
 
-    // tlvz seja interessante utilizar switch case!
-    // utilizar essa function para adicionar pontos dependendo do tipo de carta
+
     public void addPoints(Card card, String card_type){
 
         int points = card.getPoints();
 
-        if(card_type.equals("infantry") || card_type.equals("Infantry")){
-            infantry_points = infantry_points + points;
-            this.points = this.points + points;
-        }
-        else if(card_type.equals("artillary") || card_type.equals("Artillary")){
-            artillary_points = artillary_points + points;
-            this.points = this.points + points;
-        }
-        else if(card_type.equals("siege") || card_type.equals("Siege")){
-            siege_points = siege_points + points;
-            this.points = this.points + points;
+        switch (card_type.toLowerCase()) {
+            case "infantry":
+                System.out.println("entrou");
+                infantry_points = infantry_points + points;
+                this.points = this.points + points;
+                break;
+            case "artillary":
+                System.out.println("entrou");
+                artillary_points = artillary_points + points;
+                this.points = this.points + points;
+                break;
+            case "siege":
+                siege_points = siege_points + points;
+                this.points = this.points + points;
+                break;
+            default:
+                System.out.println("Esse tipo não existe!");
         }
 
     }
 
+    public void eraseBoard () {
+
+        discard.addAll(infantry);
+        discard.addAll(artillary);
+        discard.addAll(siege);
+
+        infantry.clear();
+        artillary.clear();
+        siege.clear();
+
+        infantry_points = 0;
+        artillary_points = 0;
+        siege_points = 0;
+        points = 0;
+    }
+
+    //pensar num refac
     public void showBoard(Player player1, Player player2) {
 
         Board board1 = player1.getBoard();

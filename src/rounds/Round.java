@@ -26,6 +26,10 @@ public class Round {
         this.roundNumber = roundNumber;
     }
 
+    private void eraseBoards(Player player1, Player player2) {
+        player1.getBoard().eraseBoard();
+        player2.getBoard().eraseBoard();
+    }
     private void verifyPoints(Player player1, Player player2) {
 
         Board board1 = player1.getBoard();
@@ -33,13 +37,16 @@ public class Round {
 
         if(board1.getPoints() > board2.getPoints()){
             player2.setHp(player2.getHp() - 1);
+            System.out.println("Player1 ganhou esse round.");
         }
         else if(board2.getPoints() > board1.getPoints()){
             player1.setHp(player1.getHp() - 1);
+            System.out.println("Player2 ganhou esse round.");
         }
         else{
             player1.setHp(player1.getHp() - 1);
             player2.setHp(player2.getHp() - 1);
+            System.out.println("Ambos players empataram!");
         }
         roundNumber++;
     }
@@ -104,7 +111,7 @@ public class Round {
         verifyPoints(player1, player2);
     }
 
-    public void gameAlgorithm(Player player1, Player player2){
+    public void gameAlgorithm(Player player1, Player player2) {
 
         player1.shuffle(player1.getDeck(), player1.getHand());
         player2.shuffle(player2.getDeck(), player2.getHand());
@@ -120,12 +127,15 @@ public class Round {
         }
 
         if(roundNumber == 1){
+            eraseBoards(player1,player2);
             roundLogic(player1, player2);
         }
         else if(roundNumber == 2){
+            eraseBoards(player1,player2);
             roundLogic(player1, player2);
         }
         else if(roundNumber == 3 && (player1.getHp() !=0 || player2.getHp() !=0)){
+            eraseBoards(player1,player2);
             roundLogic(player1, player2);
         }
         else{
