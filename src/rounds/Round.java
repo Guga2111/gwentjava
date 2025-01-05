@@ -88,6 +88,7 @@ public class Round {
     }
 
     private void roundLogic(Player player1, Player player2) {
+
         Random random = new Random();
         int head_tails = random.nextInt(2);
 
@@ -97,7 +98,7 @@ public class Round {
         System.out.print("O jogador inicial será: " + (head_tails == 0 ? "Player 1" : "Player 2"));
         System.out.println(" -> " + firstPlayer.getName());
 
-        while (player1.getHp() > 0 && player2.getHp() > 0 && (player1.isContinueMove() || player2.isContinueMove())) {
+        while ((player1.getHp() > 0 && player2.getHp() > 0) && (player1.isContinueMove() || player2.isContinueMove())) {
 
             if(player1.isContinueMove()) {
                 firstPlayer.getBoard().showBoard(player1, player2);
@@ -133,21 +134,23 @@ public class Round {
             System.out.println(card.getName());
         }
 
-        if(roundNumber == 1){
-            eraseBoards(player1,player2);
-            roundLogic(player1, player2);
-        }
-        else if(roundNumber == 2){
-            eraseBoards(player1,player2);
-            roundLogic(player1, player2);
-        }
-        else if(roundNumber == 3 && (player1.getHp() !=0 || player2.getHp() !=0)){
-            eraseBoards(player1,player2);
-            roundLogic(player1, player2);
-        }
-        else{
-            System.out.println("The game is over!"); //implementar mensagem de quem ganhou
-            // e qual foi o placa de pontos se foi 2x1 , 2x0 , 0x2 ou 1x2 etc...
+        while(player1.getHp() > 0 || player2.getHp() > 0) {
+            if(roundNumber == 1){
+                eraseBoards(player1,player2);
+                roundLogic(player1, player2);
+            }
+            else if(roundNumber == 2){
+                eraseBoards(player1,player2);
+                roundLogic(player1, player2);
+            }
+            else if(roundNumber == 3 && (player1.getHp() !=0 || player2.getHp() !=0)){
+                eraseBoards(player1,player2);
+                roundLogic(player1, player2);
+            }
+            else{
+                System.out.println("The game is over!"); //implementar mensagem de quem ganhou
+                // e qual foi o placa de pontos se foi 2x1 , 2x0 , 0x2 ou 1x2 etc...
+            }
         }
     }
 }
