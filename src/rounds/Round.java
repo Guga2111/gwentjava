@@ -78,6 +78,7 @@ public class Round {
             int choose = Integer.parseInt(chooseString);
             choose--;
 
+            //upgrade to a for each loop
             for(int i = 0 ; i < playerHand.size(); i++) {
                 if(playerHand.get(i) == playerHand.get(choose)) {
                     board.addCard(playerHand.get(choose), playerHand.get(choose).getType());
@@ -100,13 +101,13 @@ public class Round {
 
         while ((player1.getHp() > 0 && player2.getHp() > 0) && (player1.isContinueMove() || player2.isContinueMove())) {
 
+            if (player1.getHp() <= 0 || player2.getHp() <= 0) {
+                break;
+            }
+
             if(player1.isContinueMove()) {
                 firstPlayer.getBoard().showBoard(player1, player2);
                 playLogic(firstPlayer);
-            }
-
-            if (player1.getHp() <= 0 || player2.getHp() <= 0) {
-                break;
             }
 
             if(player2.isContinueMove()) {
@@ -115,7 +116,6 @@ public class Round {
             }
 
         }
-
         verifyPoints(player1, player2);
     }
 
@@ -134,23 +134,24 @@ public class Round {
             System.out.println(card.getName());
         }
 
-        while(player1.getHp() > 0 || player2.getHp() > 0) {
-            if(roundNumber == 1){
-                eraseBoards(player1,player2);
-                roundLogic(player1, player2);
-            }
-            else if(roundNumber == 2){
-                eraseBoards(player1,player2);
-                roundLogic(player1, player2);
-            }
-            else if(roundNumber == 3 && (player1.getHp() !=0 || player2.getHp() !=0)){
-                eraseBoards(player1,player2);
-                roundLogic(player1, player2);
-            }
-            else{
-                System.out.println("The game is over!"); //implementar mensagem de quem ganhou
-                // e qual foi o placa de pontos se foi 2x1 , 2x0 , 0x2 ou 1x2 etc...
-            }
+        while(player1.getHp() > 0 || player2.getHp() > 0 && roundNumber < 4) {
+
+            System.out.println("Está começando o round: " + roundNumber);
+
+            eraseBoards(player1,player2);
+            player1.setContinueMove(true);
+            player2.setContinueMove(true);
+
+
+            roundLogic(player1,player2);
+        }
+
+        if (player1.getHp() <= 0 && player2.getHp() <= 0) {
+            System.out.println("O jogo terminou em empate!");
+        } else if (player1.getHp() > 0) {
+            System.out.println("Player1 venceu o jogo!");
+        } else {
+            System.out.println("Player2 venceu o jogo!");
         }
     }
 }
