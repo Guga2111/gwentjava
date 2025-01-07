@@ -48,6 +48,9 @@ public class Round {
             player2.setHp(player2.getHp() - 1);
             System.out.println("Ambos players empataram!");
         }
+
+        player1.setContinueMove(false);
+        player2.setContinueMove(false);
         roundNumber++;
         System.out.println("Vamos para o round: " + roundNumber);
     }
@@ -58,32 +61,37 @@ public class Round {
         Board board = player.getBoard();
 
         System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
-        String choice = scanner.nextLine();
+        String choice = scanner.nextLine().trim().toLowerCase();
 
-        if(Arrays.asList(Constants.ANSWERS).contains(choice)) {
+        if(Arrays.asList(Constants.ANSWERS).contains(choice.toLowerCase())) {
+            System.out.println("Voce desejou passar sua rodada!");
             player.setContinueMove(false);
+
+            String condition = Boolean.toString(player.isContinueMove());
+            System.out.println("O jogador é: " + condition);
         }
         else{
             player.setContinueMove(true);
 
             int index = 1;
-
-            for(int i = 0; i < playerHand.size(); i++) {
-                System.out.println(index + ". " + playerHand.get(i).getName());
+            for (Card card : playerHand) {
+                System.out.println(index + ". " + card.getName());
                 index++;
             }
 
             System.out.println("Qual carta você deseja jogar: ");
-            String chooseString = scanner.nextLine();
-            int choose = Integer.parseInt(chooseString);
-            choose--;
+            try{
+                int choose = Integer.parseInt(scanner.nextLine()) - 1;
 
-            //upgrade to a for each loop
-            for(int i = 0 ; i < playerHand.size(); i++) {
-                if(playerHand.get(i) == playerHand.get(choose)) {
-                    board.addCard(playerHand.get(choose), playerHand.get(choose).getType());
+                if (choose >= 0 && choose < playerHand.size()) {
+                    Card chosenCard = playerHand.get(choose);
+                    board.addCard(chosenCard, chosenCard.getType());
                     playerHand.remove(choose);
+                } else {
+                    System.out.println("Escolha inválida. Tente novamente");
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Tente novamente");
             }
         }
     }
@@ -102,17 +110,29 @@ public class Round {
         while ((player1.getHp() > 0 && player2.getHp() > 0) && (player1.isContinueMove() || player2.isContinueMove())) {
 
             if (player1.getHp() <= 0 || player2.getHp() <= 0) {
+                System.out.println("Ambos jogadores sem vida!");
                 break;
             }
 
-            if(player1.isContinueMove()) {
-                firstPlayer.getBoard().showBoard(player1, player2);
-                playLogic(firstPlayer);
+            if (!player1.isContinueMove() && !player2.isContinueMove()) {
+                System.out.println("Ambos jogadores passaram!");
+                break;
             }
 
-            if(player2.isContinueMove()) {
+            if(firstPlayer.isContinueMove()) {
+                firstPlayer.getBoard().showBoard(player1, player2);
+                playLogic(firstPlayer);
+
+                String condition = Boolean.toString(firstPlayer.isContinueMove());
+                System.out.println("O jogador1 é: " + condition);
+            }
+
+            if(secondPlayer.isContinueMove()) {
                 secondPlayer.getBoard().showBoard(player1, player2);
                 playLogic(secondPlayer);
+
+                String condition = Boolean.toString(secondPlayer.isContinueMove());
+                System.out.println("O jogador2 é: " + condition);
             }
 
         }
@@ -141,7 +161,6 @@ public class Round {
             eraseBoards(player1,player2);
             player1.setContinueMove(true);
             player2.setContinueMove(true);
-
 
             roundLogic(player1,player2);
         }
