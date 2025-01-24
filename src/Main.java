@@ -1,9 +1,9 @@
 import boardandplayer.Player;
 import cards.Card;
-import cards.GeraltOfRivia;
-import cards.Letho;
+import cards.neutral.GeraltOfRivia;
+import cards.neutral.Letho;
 import cards.Nilfgaard.*;
-import cards.Triss;
+import cards.neutral.Triss;
 import rounds.Round;
 import boardandplayer.Board;
 

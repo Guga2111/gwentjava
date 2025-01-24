@@ -1,14 +1,26 @@
 package cards;
 
+import java.util.List;
+
 public class Card {
     private int points; // Dano da carta (ex: 11).
     private final String name; // Nome da carte (ex: "Geralt of Rivia").
-    private final String type; // Tipo de carta (existem 3: Infantaria, Artilharia, e Cerco).
+    private final String type; // Tipo de carta (existem 3: Infantaria, Artilharia, e Cerco) ou Lider ou Especial ( corneta, caveira (de matar as cartas mais fortes)) ou Climaticas
+    private List<String> abilities;
 
-    public Card(int damage, String name, String type){
+    public Card(int damage, String name, String type, List<String> abilities){
         this.points = damage;
         this.name = name;
         this.type = type;
+        this.abilities = abilities;
+    }
+
+    public List<String> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<String> abilities) {
+        this.abilities = abilities;
     }
 
     public void setPoints(int points){
@@ -26,4 +38,5 @@ public class Card {
     public String getType(){
         return type;
     }
+
 }
