@@ -4,7 +4,6 @@ import boardandplayer.Board;
 import boardandplayer.Player;
 import cards.Card;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -30,6 +29,33 @@ public class Round {
         player1.getBoard().eraseBoard();
         player2.getBoard().eraseBoard();
     }
+
+    private void healLogic(Player player) {
+        ArrayList<Card> discard = player.getBoard().getDiscard();
+
+        System.out.println("Escolha um carta da pilha de descarte!");
+        int index = 1;
+        for (Card card : discard) {
+            System.out.println(index + ". " + card.getName());
+            index++;
+        }
+
+        System.out.println("Qual carta você deseja jogar: ");
+        try{
+            int choose = Integer.parseInt(scanner.nextLine()) - 1;
+
+            if (choose >= 0 && choose < discard.size()) {
+                Card chosenCard = discard.get(choose);
+                player.getBoard().addCard(chosenCard, chosenCard.getType());
+                discard.remove(choose);
+            } else {
+                System.out.println("Escolha inválida. Tente novamente");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada inválida. Tente novamente");
+        }
+    }
+
     private void verifyPoints(Player player1, Player player2) {
 
         Board board1 = player1.getBoard();
@@ -85,6 +111,10 @@ public class Round {
 
                 if (choose >= 0 && choose < playerHand.size()) {
                     Card chosenCard = playerHand.get(choose);
+                    if(chosenCard.getAbilities().contains("Heal")) {
+                        // func that select a card from discard pill
+                        healLogic(player);
+                    }
                     board.addCard(chosenCard, chosenCard.getType());
                     playerHand.remove(choose);
                 } else {
