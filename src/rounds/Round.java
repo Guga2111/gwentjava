@@ -56,6 +56,26 @@ public class Round {
         }
     }
 
+    private void spyLogic(Player player) {
+
+        Random random1 = new Random();
+        Random random2 = new Random();
+
+        ArrayList<Card> deck = player.getDeck();
+
+        int card1Number = random1.nextInt(deck.size());
+        int card2Number = random2.nextInt(deck.size());
+
+        Card card1 = deck.get(card1Number);
+        Card card2 = deck.get(card2Number);
+
+        deck.remove(card1Number);
+        deck.remove(card2Number - 1);
+
+        player.getHand().add(card1);
+        player.getDeck().add(card2);
+    }
+
     private void verifyPoints(Player player1, Player player2) {
 
         Board board1 = player1.getBoard();
@@ -111,10 +131,10 @@ public class Round {
 
                 if (choose >= 0 && choose < playerHand.size()) {
                     Card chosenCard = playerHand.get(choose);
-                    if(chosenCard.getAbilities().contains("Heal")) {
-                        // func that select a card from discard pill
-                        healLogic(player);
-                    }
+
+                    if(chosenCard.getAbilities().contains("Heal")) healLogic(player);
+                    if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
+
                     board.addCard(chosenCard, chosenCard.getType());
                     playerHand.remove(choose);
                 } else {
