@@ -30,6 +30,47 @@ public class Round {
         player2.getBoard().eraseBoard();
     }
 
+    private void scorchLogic(Player adversary, Card chosenCard) {
+
+        String type = chosenCard.getType();
+
+        switch(type.toLowerCase()) {
+            case "infantry":
+                Card powerfulCardInfantry = adversary.getBoard().getInfantry().getFirst();
+
+                for(Card card : adversary.getBoard().getInfantry()) {
+                    if(powerfulCardInfantry.getPoints() < card.getPoints()) {
+                        powerfulCardInfantry = card;
+                    }
+                }
+                adversary.getBoard().getInfantry().remove(powerfulCardInfantry);
+                break;
+            case "artillary":
+                Card powerfulCardArtillary = adversary.getBoard().getArtillary().getFirst();
+
+                for(Card card : adversary.getBoard().getArtillary()) {
+                    if(powerfulCardArtillary.getPoints() < card.getPoints()) {
+                        powerfulCardArtillary = card;
+                    }
+                }
+                adversary.getBoard().getArtillary().remove(powerfulCardArtillary);
+                break;
+            case "siege":
+                Card powerfulCardSiege = adversary.getBoard().getSiege().getFirst();
+
+                for(Card card : adversary.getBoard().getSiege()) {
+                    if(powerfulCardSiege.getPoints() < card.getPoints()) {
+                        powerfulCardSiege = card;
+                    }
+                }
+                adversary.getBoard().getSiege().remove(powerfulCardSiege);
+                break;
+            default:
+                System.out.println("Unknown card type: " + type);
+                break;
+        }
+    }
+
     private void healLogic(Player player) {
         ArrayList<Card> discard = player.getBoard().getDiscard();
 
@@ -101,7 +142,7 @@ public class Round {
         System.out.println("Vamos para o round: " + roundNumber);
     }
 
-    private void playLogic(Player player) {
+    private void playLogic(Player player, Player adversary) {
 
         ArrayList<Card> playerHand = player.getHand();
         Board board = player.getBoard();
@@ -134,6 +175,7 @@ public class Round {
 
                     if(chosenCard.getAbilities().contains("Heal")) healLogic(player);
                     if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
+                    if(chosenCard.getAbilities().contains("Scorch")) scorchLogic(adversary, chosenCard);
 
                     board.addCard(chosenCard, chosenCard.getType());
                     playerHand.remove(choose);
@@ -171,7 +213,7 @@ public class Round {
 
             if(firstPlayer.isContinueMove()) {
                 firstPlayer.getBoard().showBoard(player1, player2);
-                playLogic(firstPlayer);
+                playLogic(firstPlayer, secondPlayer);
 
                 String condition = Boolean.toString(firstPlayer.isContinueMove());
                 System.out.println("O jogador1 é: " + condition);
@@ -179,7 +221,7 @@ public class Round {
 
             if(secondPlayer.isContinueMove()) {
                 secondPlayer.getBoard().showBoard(player1, player2);
-                playLogic(secondPlayer);
+                playLogic(secondPlayer, firstPlayer);
 
                 String condition = Boolean.toString(secondPlayer.isContinueMove());
                 System.out.println("O jogador2 é: " + condition);
