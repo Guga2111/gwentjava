@@ -4,10 +4,7 @@ import boardandplayer.Board;
 import boardandplayer.Player;
 import cards.Card;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Round {
 
@@ -28,6 +25,32 @@ public class Round {
     private void eraseBoards(Player player1, Player player2) {
         player1.getBoard().eraseBoard();
         player2.getBoard().eraseBoard();
+    }
+
+    private void moraleLogic(Player player, Card chosenCard) {
+
+        String type = chosenCard.getType();
+
+        switch(type.toLowerCase()){
+            case "infantry":
+                for(Card card : player.getBoard().getInfantry()) {
+                    if(!Objects.equals(card.getId(), chosenCard.getId())) card.setPoints(card.getPoints() + 1);
+                }
+                break;
+            case "artillary":
+                for(Card card : player.getBoard().getArtillary()) {
+                    if(!Objects.equals(card.getId(), chosenCard.getId())) card.setPoints(card.getPoints() + 1);
+                }
+                break;
+            case "siege":
+                for(Card card : player.getBoard().getSiege()) {
+                    if(!Objects.equals(card.getId(), chosenCard.getId())) card.setPoints(card.getPoints() + 1);
+                }
+                break;
+            default:
+                System.out.println("Unknown card type: " + type);
+                break;
+        }
     }
 
     private void scorchLogic(Player adversary, Card chosenCard) {
@@ -176,6 +199,7 @@ public class Round {
                     if(chosenCard.getAbilities().contains("Heal")) healLogic(player);
                     if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
                     if(chosenCard.getAbilities().contains("Scorch")) scorchLogic(adversary, chosenCard);
+                    if(chosenCard.getAbilities().contains("Morale")) moraleLogic(player, chosenCard);
 
                     board.addCard(chosenCard, chosenCard.getType());
                     playerHand.remove(choose);
