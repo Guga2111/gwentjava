@@ -259,7 +259,7 @@ public class Round {
 
             int index = 1;
             for (Card card : playerHand) {
-                System.out.println(index + ". " + card.getName() + " - " + card.getAbilities());
+                System.out.println(index + ". " + card.getName() + " - " + card.getAbilities() + " - " + card.getPoints() + "pts.");
                 index++;
             }
 
