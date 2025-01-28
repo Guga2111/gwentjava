@@ -27,6 +27,33 @@ public class Round {
         player2.getBoard().eraseBoard();
     }
 
+    private void musterLogic(Player player, Card chosenCard) {
+
+    }
+
+    private void agileLogic(Card chosenCard) {
+
+        String type = chosenCard.getType();
+
+        if(type.equals("Infantry/Artillary")) {
+            System.out.println("Carta do tipo versátil!!!");
+            System.out.println("Escolha 1 para utiliza-la como infantaria ou 2 para usa-la como artilharia!");
+            int index = Integer.parseInt(scanner.nextLine());
+
+            switch(index) {
+                case 1:
+                    chosenCard.setType("Infantry");
+                    break;
+                case 2:
+                    chosenCard.setType("Artillary");
+                    break;
+                default:
+                    System.out.println("Index not recognized: " + index);
+                    break;
+            }
+        }
+    }
+
     private void tightBondLogic(Player player, Card chosenCard) {
 
         String type = chosenCard.getType();
@@ -248,6 +275,8 @@ public class Round {
                     if(chosenCard.getAbilities().contains("Scorch")) scorchLogic(adversary, chosenCard);
                     if(chosenCard.getAbilities().contains("Morale")) moraleLogic(player, chosenCard);
                     if(chosenCard.getAbilities().contains("Tight Bond")) tightBondLogic(player, chosenCard);
+                    if(chosenCard.getAbilities().contains("Agile")) agileLogic(chosenCard);
+                    if(chosenCard.getAbilities().contains("Muster")) musterLogic(player, chosenCard);
 
                     board.addCard(chosenCard, chosenCard.getType());
                     playerHand.remove(choose);

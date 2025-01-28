@@ -7,7 +7,7 @@ public class Card {
     private String id;
     private int points; // Dano da carta (ex: 11).
     private final String name; // Nome da carte (ex: "Geralt of Rivia").
-    private final String type; // Tipo de carta (existem 3: Infantaria, Artilharia, e Cerco) ou Lider ou Especial ( corneta, caveira (de matar as cartas mais fortes)) ou Climaticas
+    private String type; // Tipo de carta (existem 3: Infantaria, Artilharia, e Cerco) ou Lider ou Especial ( corneta, caveira (de matar as cartas mais fortes)) ou Climaticas
     private List<String> abilities;
 
     public Card(int damage, String name, String type, List<String> abilities){
@@ -48,5 +48,9 @@ public class Card {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
