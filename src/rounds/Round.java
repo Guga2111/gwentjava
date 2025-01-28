@@ -27,6 +27,53 @@ public class Round {
         player2.getBoard().eraseBoard();
     }
 
+    private void tightBondLogic(Player player, Card chosenCard) {
+
+        String type = chosenCard.getType();
+
+        switch(type.toLowerCase()){
+            case "infantry":
+                int numberOfCardsI = 0;
+                for(Card card : player.getBoard().getInfantry()) {
+                    if(card.getName().equals(chosenCard.getName())) numberOfCardsI++;
+                }
+                for(Card card : player.getBoard().getInfantry()) {
+                    if(card.getName().equals(chosenCard.getName())) {
+                        int newPoints = (int) (card.getPoints() * Math.pow(2, numberOfCardsI));
+                        card.setPoints(newPoints);
+                    }
+                }
+                break;
+            case "artillary":
+                int numberOfCardsA = 0;
+                for(Card card : player.getBoard().getArtillary()) {
+                    if(card.getName().equals(chosenCard.getName())) numberOfCardsA++;
+                }
+                for(Card card : player.getBoard().getArtillary()) {
+                    if(card.getName().equals(chosenCard.getName())) {
+                        int newPoints = (int) (card.getPoints() * Math.pow(2, numberOfCardsA));
+                        card.setPoints(newPoints);
+                    }
+                }
+                break;
+            case "siege":
+                double numberOfCardsS = 0;
+                for(Card card : player.getBoard().getSiege()) {
+                    if(card.getName().equals(chosenCard.getName())) numberOfCardsS++;
+                }
+                for(Card card : player.getBoard().getSiege()) {
+                    if(card.getName().equals(chosenCard.getName())) {
+                        int newPoints = (int) (card.getPoints() * Math.pow(2, numberOfCardsS));
+                        card.setPoints(newPoints);
+                    }
+                }
+                break;
+            default:
+                System.out.println("Unknown card type: " + type);
+                break;
+        }
+    }
+
     private void moraleLogic(Player player, Card chosenCard) {
 
         String type = chosenCard.getType();
@@ -185,7 +232,7 @@ public class Round {
 
             int index = 1;
             for (Card card : playerHand) {
-                System.out.println(index + ". " + card.getName());
+                System.out.println(index + ". " + card.getName() + " - " + card.getAbilities());
                 index++;
             }
 
@@ -200,6 +247,7 @@ public class Round {
                     if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
                     if(chosenCard.getAbilities().contains("Scorch")) scorchLogic(adversary, chosenCard);
                     if(chosenCard.getAbilities().contains("Morale")) moraleLogic(player, chosenCard);
+                    if(chosenCard.getAbilities().contains("Tight Bond")) tightBondLogic(player, chosenCard);
 
                     board.addCard(chosenCard, chosenCard.getType());
                     playerHand.remove(choose);
