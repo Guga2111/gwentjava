@@ -70,6 +70,16 @@ public class Round {
             case "Sun":
                 climates.clear();
                 //think how to turn back the points to the cards!
+                for (Card card : infantry) {
+                    card.resetPoints();
+                }
+                for (Card card : artillary) {
+                    card.resetPoints();
+                }
+                for (Card card : siege) {
+                    card.resetPoints();
+                }
+                break;
             default:
                 System.out.println("Climate type unknown");
                 break;
