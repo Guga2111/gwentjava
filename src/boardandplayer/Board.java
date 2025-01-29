@@ -87,20 +87,24 @@ public class Board {
         this.discard = discard;
     }
 
-    public void addCard(Card card, String card_type) {
+    public void addCard(Card card) {
 
-        switch (card_type.toLowerCase()) {
+        String type = card.getType();
+
+        switch (type.toLowerCase()) {
             case "infantry":
                 infantry.add(card);
-                addPoints(card, card_type.toLowerCase());
+                addPoints(card, type.toLowerCase());
                 break;
             case "artillary":
                 artillary.add(card);
-                addPoints(card, card_type.toLowerCase());
+                addPoints(card, type.toLowerCase());
                 break;
             case "siege":
                 siege.add(card);
-                addPoints(card, card_type.toLowerCase());
+                addPoints(card, type.toLowerCase());
+                break;
+            case "special":
                 break;
             default:
                 System.out.println("Card type not recognized");

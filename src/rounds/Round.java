@@ -27,8 +27,77 @@ public class Round {
         player2.getBoard().eraseBoard();
     }
 
+    private void decoyLogic(Player player, Card chosenCard) {
+
+        System.out.println("Você deseja substituir alguma carta de qual campo: ");
+        System.out.println("1. - Infantaria");
+        System.out.println("2. - Artilharia");
+        System.out.println("3. - Cerco");
+
+        int index = Integer.parseInt(scanner.nextLine());
+
+        switch (index) {
+            case 1:
+                int valInfantry = 1;
+                for(Card card : player.getBoard().getInfantry()) {
+                    System.out.println(valInfantry + ". " + card.getName() + " - " + card.getAbilities() + " - " + card.getPoints() + "pts.");
+                    valInfantry++;
+                }
+                System.out.println("Qual carta você deseja jogar: ");
+                int choose = Integer.parseInt(scanner.nextLine()) - 1;
+
+                player.getHand().add(player.getBoard().getInfantry().get(choose));
+                player.getBoard().getInfantry().remove(choose);
+
+                chosenCard.setType("Infantry");
+                player.getBoard().addCard(chosenCard);
+                break;
+            case 2:
+                int valArtillary = 1;
+                for(Card card : player.getBoard().getArtillary()) {
+                    System.out.println(valArtillary + ". " + card.getName() + " - " + card.getAbilities() + " - " + card.getPoints() + "pts.");
+                    valArtillary++;
+                }
+                System.out.println("Qual carta você deseja jogar: ");
+                int choose2 = Integer.parseInt(scanner.nextLine()) - 1;
+
+                player.getHand().add(player.getBoard().getArtillary().get(choose2));
+                player.getBoard().getArtillary().remove(choose2);
+
+                chosenCard.setType("Artillary");
+                player.getBoard().addCard(chosenCard);
+                break;
+            case 3:
+                int valSiege = 1;
+                for(Card card : player.getBoard().getSiege()) {
+                    System.out.println(valSiege + ". " + card.getName() + " - " + card.getAbilities() + " - " + card.getPoints() + "pts.");
+                    valSiege++;
+                }
+                System.out.println("Qual carta você deseja jogar: ");
+                int choose3 = Integer.parseInt(scanner.nextLine()) - 1;
+
+                player.getHand().add(player.getBoard().getSiege().get(choose3));
+                player.getBoard().getSiege().remove(choose3);
+
+                chosenCard.setType("Siege");
+                player.getBoard().addCard(chosenCard);
+                break;
+            default:
+                System.out.println("Unknown type");
+                break;
+        }
+    }
+
     private void musterLogic(Player player, Card chosenCard) {
 
+        Board board = player.getBoard();
+
+        for(Card card : player.getDeck()) {
+            if(card.getName().equals(chosenCard.getName())) {
+                board.addCard(card);
+                player.getDeck().remove(card);
+            }
+        }
     }
 
     private void agileLogic(Card chosenCard) {
@@ -184,7 +253,7 @@ public class Round {
 
             if (choose >= 0 && choose < discard.size()) {
                 Card chosenCard = discard.get(choose);
-                player.getBoard().addCard(chosenCard, chosenCard.getType());
+                player.getBoard().addCard(chosenCard);
                 discard.remove(choose);
             } else {
                 System.out.println("Escolha inválida. Tente novamente");
@@ -277,8 +346,9 @@ public class Round {
                     if(chosenCard.getAbilities().contains("Tight Bond")) tightBondLogic(player, chosenCard);
                     if(chosenCard.getAbilities().contains("Agile")) agileLogic(chosenCard);
                     if(chosenCard.getAbilities().contains("Muster")) musterLogic(player, chosenCard);
+                    if(chosenCard.getAbilities().contains("Decoy")) decoyLogic(player, chosenCard);
 
-                    board.addCard(chosenCard, chosenCard.getType());
+                    board.addCard(chosenCard);
                     playerHand.remove(choose);
                 } else {
                     System.out.println("Escolha inválida. Tente novamente");
