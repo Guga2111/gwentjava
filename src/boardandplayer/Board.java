@@ -9,6 +9,7 @@ public class Board {
     private ArrayList<Card> artillary;
     private ArrayList<Card> siege;
     private ArrayList<Card> discard;
+    private ArrayList<Card> climate;
     private int infantry_points = 0;
     private int artillary_points = 0;
     private int siege_points = 0;
@@ -87,6 +88,14 @@ public class Board {
         this.discard = discard;
     }
 
+    public ArrayList<Card> getClimate() {
+        return climate;
+    }
+
+    public void setClimate(ArrayList<Card> climate) {
+        this.climate = climate;
+    }
+
     public void addCard(Card card) {
 
         String type = card.getType();
@@ -103,6 +112,9 @@ public class Board {
             case "siege":
                 siege.add(card);
                 addPoints(card, type.toLowerCase());
+                break;
+            case "climate":
+                climate.add(card);
                 break;
             case "special":
                 break;

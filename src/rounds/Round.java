@@ -5,6 +5,9 @@ import boardandplayer.Player;
 import cards.Card;
 
 import java.util.*;
+import java.util.stream.Stream;
+
+import static java.util.Locale.filter;
 
 public class Round {
 
@@ -25,6 +28,49 @@ public class Round {
     private void eraseBoards(Player player1, Player player2) {
         player1.getBoard().eraseBoard();
         player2.getBoard().eraseBoard();
+    }
+
+    private void climateLogic(Player player, Card chosenCard) {
+
+        String climate = chosenCard.getAbilities().getFirst();
+        ArrayList<Card> climates = player.getBoard().getClimate();
+
+        ArrayList<Card> infantry = player.getBoard().getInfantry();
+        ArrayList<Card> artillary = player.getBoard().getArtillary();
+        ArrayList<Card> siege = player.getBoard().getSiege();
+
+        switch(climate) {
+            case "Snow":
+                climates.add(chosenCard);
+
+                for(int i = 0; i < infantry.size(); i++) {
+                    Card card = infantry.get(i);
+                    card.setPoints(1);
+                    infantry.set(i, card);
+                }
+                break;
+            case "Fog":
+                climates.add(chosenCard);
+
+                for(int i = 0; i < artillary.size(); i++) {
+                    Card card = artillary.get(i);
+                    card.setPoints(1);
+                    artillary.set(i, card);
+                }
+                break;
+            case "Rain":
+                climates.add(chosenCard);
+
+                for(int i = 0; i < siege.size(); i++) {
+                    Card card = siege.get(i);
+                    card.setPoints(1);
+                    siege.set(i, card);
+                }
+                break;
+            default:
+                System.out.println("Climate type unknown");
+                break;
+        }
     }
 
     private void decoyLogic(Player player, Card chosenCard) {
@@ -339,6 +385,15 @@ public class Round {
                 if (choose >= 0 && choose < playerHand.size()) {
                     Card chosenCard = playerHand.get(choose);
 
+                    boolean existSnow = board.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
+                    if(existSnow && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(1);
+
+                    boolean existRain = board.getClimate().stream().anyMatch(card -> card.getName().equals("Rain"));
+                    if(existRain && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
+
+                    boolean existFog = board.getClimate().stream().anyMatch(card -> card.getName().equals("Fog"));
+                    if(existFog && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
+
                     if(chosenCard.getAbilities().contains("Heal")) healLogic(player);
                     if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
                     if(chosenCard.getAbilities().contains("Scorch")) scorchLogic(adversary, chosenCard);
@@ -347,6 +402,10 @@ public class Round {
                     if(chosenCard.getAbilities().contains("Agile")) agileLogic(chosenCard);
                     if(chosenCard.getAbilities().contains("Muster")) musterLogic(player, chosenCard);
                     if(chosenCard.getAbilities().contains("Decoy")) decoyLogic(player, chosenCard);
+                    if (Stream.of("Snow", "Rain", "Fog", "Sun")
+                            .anyMatch(chosenCard.getAbilities()::contains)) {
+                        climateLogic(player, chosenCard);
+                    }
 
                     board.addCard(chosenCard);
                     playerHand.remove(choose);
