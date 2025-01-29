@@ -67,6 +67,9 @@ public class Round {
                     siege.set(i, card);
                 }
                 break;
+            case "Sun":
+                climates.clear();
+                //think how to turn back the points to the cards!
             default:
                 System.out.println("Climate type unknown");
                 break;
