@@ -396,6 +396,7 @@ public class Round {
                 int choose = Integer.parseInt(scanner.nextLine()) - 1;
 
                 if (choose >= 0 && choose < playerHand.size()) {
+                    //falta algumas verificações quando for usar a carta 'sun' pois precisa verificar boost morales e tight bonds
                     Card chosenCard = playerHand.get(choose);
 
                     boolean existSnow = board.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
