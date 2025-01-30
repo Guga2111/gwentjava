@@ -269,6 +269,7 @@ public class Round {
                     }
                 }
                 adversary.getBoard().getInfantry().remove(powerfulCardInfantry);
+                adversary.getBoard().setInfantry_points(adversary.getBoard().getInfantry_points() - powerfulCardInfantry.getPoints());
                 break;
             case "artillary":
                 Card powerfulCardArtillary = adversary.getBoard().getArtillary().getFirst();
@@ -279,6 +280,7 @@ public class Round {
                     }
                 }
                 adversary.getBoard().getArtillary().remove(powerfulCardArtillary);
+                adversary.getBoard().setArtillary_points(adversary.getBoard().getArtillary_points() - powerfulCardArtillary.getPoints());
                 break;
             case "siege":
                 Card powerfulCardSiege = adversary.getBoard().getSiege().getFirst();
@@ -289,6 +291,7 @@ public class Round {
                     }
                 }
                 adversary.getBoard().getSiege().remove(powerfulCardSiege);
+                adversary.getBoard().setSiege_points(adversary.getBoard().getSiege_points() - powerfulCardSiege.getPoints());
                 break;
             default:
                 System.out.println("Unknown card type: " + type);
