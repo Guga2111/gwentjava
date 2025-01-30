@@ -70,15 +70,42 @@ public class Round {
             case "Sun":
                 climates.clear();
                 //think how to turn back the points to the cards!
-                for (Card card : infantry) {
+                for(Card card : infantry) {
                     card.resetPoints();
                 }
+                for(Card card : infantry) {
+                    if(card.getAbilities().contains("Morale")) {
+                        moraleLogic(player, card);
+                    }
+                    if(card.getAbilities().contains("Tight Bond")){
+                        tightBondLogic(player, card);
+                    }
+                }
+
                 for (Card card : artillary) {
                     card.resetPoints();
                 }
+                for(Card card : artillary) {
+                    if(card.getAbilities().contains("Morale")) {
+                        moraleLogic(player, card);
+                    }
+                    if(card.getAbilities().contains("Tight Bond")){
+                        tightBondLogic(player, card);
+                    }
+                }
+
                 for (Card card : siege) {
                     card.resetPoints();
                 }
+                for(Card card : siege) {
+                    if(card.getAbilities().contains("Morale")) {
+                        moraleLogic(player, card);
+                    }
+                    if(card.getAbilities().contains("Tight Bond")){
+                        tightBondLogic(player, card);
+                    }
+                }
+
                 break;
             default:
                 System.out.println("Climate type unknown");
