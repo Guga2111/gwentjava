@@ -10,6 +10,9 @@ public class Board {
     private ArrayList<Card> siege;
     private ArrayList<Card> discard;
     private ArrayList<Card> climate;
+    private boolean isDoubleInfantry = false;
+    private boolean isDoubleArtillary = false;
+    private boolean isDoubleSiege = false;
     private int infantry_points = 0;
     private int artillary_points = 0;
     private int siege_points = 0;
@@ -96,6 +99,30 @@ public class Board {
         this.climate = climate;
     }
 
+    public boolean isDoubleSiege() {
+        return isDoubleSiege;
+    }
+
+    public void setDoubleSiege(boolean doubleSiege) {
+        isDoubleSiege = doubleSiege;
+    }
+
+    public boolean isDoubleArtillary() {
+        return isDoubleArtillary;
+    }
+
+    public void setDoubleArtillary(boolean doubleArtillary) {
+        isDoubleArtillary = doubleArtillary;
+    }
+
+    public boolean isDoubleInfantry() {
+        return isDoubleInfantry;
+    }
+
+    public void setDoubleInfantry(boolean doubleInfantry) {
+        isDoubleInfantry = doubleInfantry;
+    }
+
     public void addCard(Card card) {
 
         String type = card.getType();
@@ -123,7 +150,6 @@ public class Board {
                 break;
         }
     }
-
 
     public void addPoints(Card card, String card_type){
 
@@ -155,10 +181,12 @@ public class Board {
         discard.addAll(infantry);
         discard.addAll(artillary);
         discard.addAll(siege);
+        discard.addAll(climate);
 
         infantry.clear();
         artillary.clear();
         siege.clear();
+        climate.clear();
 
         infantry_points = 0;
         artillary_points = 0;
@@ -179,7 +207,7 @@ public class Board {
         System.out.println("ARTILLARY: " + board2.getArtillary_points() + " pts.");
         System.out.println("INFANTRY: " + board2.getInfantry_points() + " pts.");
 
-        System.out.println("-----*------*------*------*------");
+        System.out.println("-----*------*------*------*------" + "CLIMATE ACTIVE: " + climate);
 
         System.out.println("INFANTRY: " + board1.getInfantry_points() + " pts.");
         System.out.println("ARTILLARY: " + board1.getArtillary_points() + " pts.");

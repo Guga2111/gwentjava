@@ -30,6 +30,37 @@ public class Round {
         player2.getBoard().eraseBoard();
     }
 
+    private void commanderHornLogic(Player player, Card chosenCard) {
+
+        System.out.println("Você deseja jogar a corneta aonde");
+        System.out.println("1. - Infantaria");
+        System.out.println("2. - Artilharia");
+        System.out.println("3. - Cerco");
+
+        int index = Integer.parseInt(scanner.nextLine());
+
+        switch (index) {
+            case 1:
+                player.getBoard().setDoubleInfantry(true);
+                for(Card card : player.getBoard().getInfantry()) {
+                    card.setPoints(card.getPoints() * 2);
+                }
+                break;
+            case 2:
+                player.getBoard().setDoubleArtillary(true);
+                for(Card card : player.getBoard().getArtillary()) {
+                    card.setPoints(card.getPoints() * 2);
+                }
+                break;
+            case 3:
+                player.getBoard().setDoubleSiege(true);
+                for(Card card : player.getBoard().getSiege()) {
+                    card.setPoints(card.getPoints() * 2);
+                }
+                break;
+        }
+    }
+
     private void climateLogic(Player player, Card chosenCard) {
 
         String climate = chosenCard.getAbilities().getFirst();
@@ -73,6 +104,7 @@ public class Round {
                 for(Card card : infantry) {
                     card.resetPoints();
                 }
+
                 for(Card card : infantry) {
                     if(card.getAbilities().contains("Morale")) {
                         moraleLogic(player, card);
@@ -451,6 +483,11 @@ public class Round {
                         climateLogic(player, chosenCard);
                     }
 
+                    if(board.isDoubleInfantry()) chosenCard.setPoints(chosenCard.getPoints() * 2);
+                    if(board.isDoubleArtillary()) chosenCard.setPoints(chosenCard.getPoints() * 2);
+                    if(board.isDoubleSiege()) chosenCard.setPoints(chosenCard.getPoints() * 2);
+
+                    if(chosenCard.getAbilities().contains("CommanderHorn")) commanderHornLogic(player, chosenCard);
                     board.addCard(chosenCard);
                     playerHand.remove(choose);
                 } else {
