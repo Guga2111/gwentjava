@@ -30,6 +30,23 @@ public class Round {
         player2.getBoard().eraseBoard();
     }
 
+    private void verifyHero(Player player) {
+
+        ArrayList<Card> infantry = player.getBoard().getInfantry();
+        ArrayList<Card> artillary = player.getBoard().getArtillary();
+        ArrayList<Card> siege = player.getBoard().getSiege();
+
+        for(Card card : infantry) {
+            if(card.getAbilities().contains("Hero")) card.resetPoints();
+        }
+        for(Card card : artillary) {
+            if(card.getAbilities().contains("Hero")) card.resetPoints();
+        }
+        for(Card card : siege) {
+            if(card.getAbilities().contains("Hero")) card.resetPoints();
+        }
+    }
+
     private void commanderHornLogic(Player player, Card chosenCard) {
 
         System.out.println("Você deseja jogar a corneta aonde");
@@ -459,6 +476,8 @@ public class Round {
 
                 if (choose >= 0 && choose < playerHand.size()) {
                     //falta algumas verificações quando for usar a carta 'sun' pois precisa verificar boost morales e tight bonds
+                    verifyHero(player);
+
                     Card chosenCard = playerHand.get(choose);
 
                     boolean existSnow = board.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
@@ -491,6 +510,8 @@ public class Round {
 
                     board.addCard(chosenCard);
                     playerHand.remove(choose);
+
+                    verifyHero(player);
                 } else {
                     System.out.println("Escolha inválida. Tente novamente");
                 }
