@@ -10,6 +10,7 @@ public class Board {
     private ArrayList<Card> siege;
     private ArrayList<Card> discard;
     private ArrayList<Card> climate;
+    private Card leader;
     private boolean isDoubleInfantry = false;
     private boolean isDoubleArtillary = false;
     private boolean isDoubleSiege = false;
@@ -49,8 +50,14 @@ public class Board {
         this.siege_points = siege_points;
     }
 
+    public Card getLeader() {
+        return leader;
+    }
 
-    //getters e setters
+    public void setLeader(Card leader) {
+        this.leader = leader;
+    }
+
     public ArrayList<Card> getInfantry() {
         return infantry;
     }

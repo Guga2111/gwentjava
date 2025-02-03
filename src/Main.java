@@ -35,7 +35,6 @@ public class Main {
         ArrayList<Card> deck = new ArrayList<>();
         ArrayList<Card> ownedCards = player.getOwnedCards();
 
-        // rever algum conceito do java para facilitar essa implementacao
         for(Card card : ownedCards){
             System.out.println("carta implementada: " + card);
             deck.add(card);
