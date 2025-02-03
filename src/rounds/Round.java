@@ -323,7 +323,7 @@ public class Round {
                 Card powerfulCardInfantry = adversary.getBoard().getInfantry().getFirst();
 
                 for(Card card : adversary.getBoard().getInfantry()) {
-                    if(powerfulCardInfantry.getPoints() < card.getPoints()) {
+                    if(powerfulCardInfantry.getPoints() < card.getPoints() && !card.getAbilities().contains("Hero")) {
                         powerfulCardInfantry = card;
                     }
                 }
@@ -334,7 +334,7 @@ public class Round {
                 Card powerfulCardArtillary = adversary.getBoard().getArtillary().getFirst();
 
                 for(Card card : adversary.getBoard().getArtillary()) {
-                    if(powerfulCardArtillary.getPoints() < card.getPoints()) {
+                    if(powerfulCardArtillary.getPoints() < card.getPoints() && !card.getAbilities().contains("Hero")) {
                         powerfulCardArtillary = card;
                     }
                 }
@@ -345,7 +345,7 @@ public class Round {
                 Card powerfulCardSiege = adversary.getBoard().getSiege().getFirst();
 
                 for(Card card : adversary.getBoard().getSiege()) {
-                    if(powerfulCardSiege.getPoints() < card.getPoints()) {
+                    if(powerfulCardSiege.getPoints() < card.getPoints() && !card.getAbilities().contains("Hero")) {
                         powerfulCardSiege = card;
                     }
                 }
