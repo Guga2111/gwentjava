@@ -483,11 +483,12 @@ public class Round {
                         climateLogic(player, chosenCard);
                     }
 
-                    if(board.isDoubleInfantry()) chosenCard.setPoints(chosenCard.getPoints() * 2);
-                    if(board.isDoubleArtillary()) chosenCard.setPoints(chosenCard.getPoints() * 2);
-                    if(board.isDoubleSiege()) chosenCard.setPoints(chosenCard.getPoints() * 2);
+                    if(board.isDoubleInfantry() && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(chosenCard.getPoints() * 2);
+                    if(board.isDoubleArtillary() && chosenCard.getType().equals("Artillary")) chosenCard.setPoints(chosenCard.getPoints() * 2);
+                    if(board.isDoubleSiege() && chosenCard.getType().equals("Siege")) chosenCard.setPoints(chosenCard.getPoints() * 2);
 
                     if(chosenCard.getAbilities().contains("CommanderHorn")) commanderHornLogic(player, chosenCard);
+
                     board.addCard(chosenCard);
                     playerHand.remove(choose);
                 } else {
