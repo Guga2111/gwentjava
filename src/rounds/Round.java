@@ -451,7 +451,7 @@ public class Round {
         ArrayList<Card> playerHand = player.getHand();
         Board board = player.getBoard();
 
-        System.out.println("Voce deseja passar sua vez, responda com (S) ou (N): ");
+        System.out.println("Voce deseja passar sua vez, responda com (S) ou (N) ou (LEADER): ");
         String choice = scanner.nextLine().trim().toLowerCase();
 
         if(Arrays.asList(Constants.ANSWERS).contains(choice.toLowerCase())) {
@@ -462,62 +462,82 @@ public class Round {
             System.out.println("O jogador é: " + condition);
         }
         else{
-            player.setContinueMove(true);
+            if(!Arrays.asList(Constants.LEADER).contains(choice.toLowerCase())) {
+                player.setContinueMove(true);
 
-            int index = 1;
-            for (Card card : playerHand) {
-                System.out.println(index + ". " + card.getName() + " - " + card.getAbilities() + " - " + card.getPoints() + "pts.");
-                index++;
-            }
-
-            System.out.println("Qual carta você deseja jogar: ");
-            try{
-                int choose = Integer.parseInt(scanner.nextLine()) - 1;
-
-                if (choose >= 0 && choose < playerHand.size()) {
-                    //falta algumas verificações quando for usar a carta 'sun' pois precisa verificar boost morales e tight bonds
-                    verifyHero(player);
-
-                    Card chosenCard = playerHand.get(choose);
-
-                    boolean existSnow = board.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
-                    if(existSnow && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(1);
-
-                    boolean existRain = board.getClimate().stream().anyMatch(card -> card.getName().equals("Rain"));
-                    if(existRain && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
-
-                    boolean existFog = board.getClimate().stream().anyMatch(card -> card.getName().equals("Fog"));
-                    if(existFog && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
-
-                    if(chosenCard.getAbilities().contains("Heal")) healLogic(player);
-                    if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
-                    if(chosenCard.getAbilities().contains("Scorch")) scorchLogic(adversary, chosenCard);
-                    if(chosenCard.getAbilities().contains("Morale")) moraleLogic(player, chosenCard);
-                    if(chosenCard.getAbilities().contains("Tight Bond")) tightBondLogic(player, chosenCard);
-                    if(chosenCard.getAbilities().contains("Agile")) agileLogic(chosenCard);
-                    if(chosenCard.getAbilities().contains("Muster")) musterLogic(player, chosenCard);
-                    if(chosenCard.getAbilities().contains("Decoy")) decoyLogic(player, chosenCard);
-                    if (Stream.of("Snow", "Rain", "Fog", "Sun")
-                            .anyMatch(chosenCard.getAbilities()::contains)) {
-                        climateLogic(player, chosenCard);
-                    }
-
-                    if(board.isDoubleInfantry() && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(chosenCard.getPoints() * 2);
-                    if(board.isDoubleArtillary() && chosenCard.getType().equals("Artillary")) chosenCard.setPoints(chosenCard.getPoints() * 2);
-                    if(board.isDoubleSiege() && chosenCard.getType().equals("Siege")) chosenCard.setPoints(chosenCard.getPoints() * 2);
-
-                    if(chosenCard.getAbilities().contains("CommanderHorn")) commanderHornLogic(player, chosenCard);
-
-                    board.addCard(chosenCard);
-                    playerHand.remove(choose);
-
-                    verifyHero(player);
-                } else {
-                    System.out.println("Escolha inválida. Tente novamente");
+                int index = 1;
+                for (Card card : playerHand) {
+                    System.out.println(index + ". " + card.getName() + " - " + card.getAbilities() + " - " + card.getPoints() + "pts.");
+                    index++;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Tente novamente");
+
+                System.out.println("Qual carta você deseja jogar: ");
+                try{
+                    int choose = Integer.parseInt(scanner.nextLine()) - 1;
+
+                    if (choose >= 0 && choose < playerHand.size()) {
+                        //falta algumas verificações quando for usar a carta 'sun' pois precisa verificar boost morales e tight bonds
+                        verifyHero(player);
+
+                        Card chosenCard = playerHand.get(choose);
+
+                        boolean existSnow = board.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
+                        if(existSnow && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(1);
+
+                        boolean existRain = board.getClimate().stream().anyMatch(card -> card.getName().equals("Rain"));
+                        if(existRain && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
+
+                        boolean existFog = board.getClimate().stream().anyMatch(card -> card.getName().equals("Fog"));
+                        if(existFog && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
+
+                        if(chosenCard.getAbilities().contains("Heal")) healLogic(player);
+                        if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
+                        if(chosenCard.getAbilities().contains("Scorch")) scorchLogic(adversary, chosenCard);
+                        if(chosenCard.getAbilities().contains("Morale")) moraleLogic(player, chosenCard);
+                        if(chosenCard.getAbilities().contains("Tight Bond")) tightBondLogic(player, chosenCard);
+                        if(chosenCard.getAbilities().contains("Agile")) agileLogic(chosenCard);
+                        if(chosenCard.getAbilities().contains("Muster")) musterLogic(player, chosenCard);
+                        if(chosenCard.getAbilities().contains("Decoy")) decoyLogic(player, chosenCard);
+                        if (Stream.of("Snow", "Rain", "Fog", "Sun")
+                                .anyMatch(chosenCard.getAbilities()::contains)) {
+                            climateLogic(player, chosenCard);
+                        }
+
+                        if(board.isDoubleInfantry() && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(chosenCard.getPoints() * 2);
+                        if(board.isDoubleArtillary() && chosenCard.getType().equals("Artillary")) chosenCard.setPoints(chosenCard.getPoints() * 2);
+                        if(board.isDoubleSiege() && chosenCard.getType().equals("Siege")) chosenCard.setPoints(chosenCard.getPoints() * 2);
+
+                        if(chosenCard.getAbilities().contains("CommanderHorn")) commanderHornLogic(player, chosenCard);
+
+                        board.addCard(chosenCard);
+                        playerHand.remove(choose);
+
+                        verifyHero(player);
+                    } else {
+                        System.out.println("Escolha inválida. Tente novamente");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Entrada inválida. Tente novamente");
+                }
+            } else {
+                //leader logic!
+
+                String leadersName = board.getLeader().getName();
+
+                if(leadersName.startsWith("Emhyr")) {
+
+                }
+                if(leadersName.startsWith("Foltest")) {
+
+                }
+                if(leadersName.startsWith("Francesca")) {
+
+                }
+                if(leadersName.startsWith("Eredin")) {
+
+                }
             }
+
         }
     }
 

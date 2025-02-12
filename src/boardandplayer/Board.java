@@ -130,6 +130,8 @@ public class Board {
         isDoubleInfantry = doubleInfantry;
     }
 
+
+
     public void addCard(Card card) {
 
         String type = card.getType();
