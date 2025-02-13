@@ -616,7 +616,10 @@ public class Round {
 
             System.out.println("Está começando o round: " + roundNumber);
 
-            eraseBoards(player1,player2);
+            Board board1 = player1.getBoard();
+            Board board2 = player2.getBoard();
+            if(!board1.isBoardEmpty() && board2.isBoardEmpty()) eraseBoards(player1,player2);
+
             player1.setContinueMove(true);
             player2.setContinueMove(true);
 

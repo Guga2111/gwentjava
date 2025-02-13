@@ -23,6 +23,7 @@ public class Board {
         this.infantry = new ArrayList<>();
         this.artillary = new ArrayList<>();
         this.siege = new ArrayList<>();
+        this.climate = new ArrayList<>();
         this.discard = new ArrayList<>();
     }
 
@@ -130,7 +131,12 @@ public class Board {
         isDoubleInfantry = doubleInfantry;
     }
 
-
+    public boolean isBoardEmpty() {
+        return infantry.isEmpty() &&
+                artillary.isEmpty() &&
+                siege.isEmpty() &&
+                climate.isEmpty();
+    }
 
     public void addCard(Card card) {
 
