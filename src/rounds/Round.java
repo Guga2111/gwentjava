@@ -30,6 +30,22 @@ public class Round {
         player2.getBoard().eraseBoard();
     }
 
+    private void FoltestKing(Player player) {
+
+        ArrayList<Card> deck = player.getDeck();
+        ArrayList<Card> climates = player.getBoard().getClimate();
+
+        for(Card card : deck) {
+            if(card.getAbilities().contains("Fog")) {
+                climates.add(card);
+                deck.remove(card);
+            }
+        }
+    }
+
+    private void emhyrTheWhiteFlame() {
+
+    }
     private void verifyHero(Player player) {
 
         ArrayList<Card> infantry = player.getBoard().getInfantry();
@@ -93,7 +109,7 @@ public class Round {
 
                 for(int i = 0; i < infantry.size(); i++) {
                     Card card = infantry.get(i);
-                    card.setPoints(1);
+                    if(!card.getAbilities().contains("Hero")) card.setPoints(1);
                     infantry.set(i, card);
                 }
                 break;
@@ -102,7 +118,7 @@ public class Round {
 
                 for(int i = 0; i < artillary.size(); i++) {
                     Card card = artillary.get(i);
-                    card.setPoints(1);
+                    if(!card.getAbilities().contains("Hero")) card.setPoints(1);
                     artillary.set(i, card);
                 }
                 break;
@@ -111,7 +127,7 @@ public class Round {
 
                 for(int i = 0; i < siege.size(); i++) {
                     Card card = siege.get(i);
-                    card.setPoints(1);
+                    if(!card.getAbilities().contains("Hero")) card.setPoints(1);
                     siege.set(i, card);
                 }
                 break;
@@ -457,9 +473,6 @@ public class Round {
         if(Arrays.asList(Constants.ANSWERS).contains(choice.toLowerCase())) {
             System.out.println("Voce desejou passar sua rodada!");
             player.setContinueMove(false);
-
-            String condition = Boolean.toString(player.isContinueMove());
-            System.out.println("O jogador é: " + condition);
         }
         else{
             if(!Arrays.asList(Constants.LEADER).contains(choice.toLowerCase())) {

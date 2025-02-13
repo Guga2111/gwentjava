@@ -4,6 +4,7 @@ import cards.neutral.GeraltOfRivia;
 import cards.neutral.Letho;
 import cards.Nilfgaard.*;
 import cards.neutral.Triss;
+import cards.special.Fog;
 import rounds.Round;
 import boardandplayer.Board;
 
@@ -57,6 +58,7 @@ public class Main {
         cardList.add(new Manganela());
         cardList.add(new Letho());
         cardList.add(new Triss());
+        cardList.add(new Fog());
 
         player.setOwnedCards(cardList);
     }
