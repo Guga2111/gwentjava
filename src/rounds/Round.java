@@ -115,7 +115,7 @@ public class Round {
                 break;
             case "Fog":
                 climates.add(chosenCard);
-
+                System.out.println(player.getBoard().getClimate().getFirst());
                 for(int i = 0; i < artillary.size(); i++) {
                     Card card = artillary.get(i);
                     if(!card.getAbilities().contains("Hero")) card.setPoints(1);
@@ -132,6 +132,7 @@ public class Round {
                 }
                 break;
             case "Sun":
+                System.out.println("Enter sun logic!");
                 climates.clear();
                 //think how to turn back the points to the cards!
                 for(Card card : infantry) {

@@ -3,6 +3,7 @@ package boardandplayer;
 import cards.Card;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Board {
     private ArrayList<Card> infantry;
@@ -222,7 +223,7 @@ public class Board {
         System.out.println("ARTILLARY: " + board2.getArtillary_points() + " pts.");
         System.out.println("INFANTRY: " + board2.getInfantry_points() + " pts.");
 
-        System.out.println("-----*------*------*------*------" + "CLIMATE ACTIVE: " + climate);
+        System.out.println("-----*------*------*------*------" + "CLIMATE ACTIVE: " + board1.getClimate().stream().map(Card::getName).collect(Collectors.joining(", ")) + ", " +board2.getClimate().stream().map(Card::getName).collect(Collectors.joining(", ")) );
 
         System.out.println("INFANTRY: " + board1.getInfantry_points() + " pts.");
         System.out.println("ARTILLARY: " + board1.getArtillary_points() + " pts.");
