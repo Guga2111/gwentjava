@@ -169,19 +169,21 @@ public class Board {
     public void addPoints(Card card, String card_type){
 
         int points = card.getPoints();
+        System.out.println("Pontos antes de entrar no switch: " + points);
 
         switch (card_type.toLowerCase()) {
             case "infantry":
-                System.out.println("entrou");
+                System.out.println("entrou infantaria, " + points);
                 infantry_points = infantry_points + points;
                 this.points = this.points + points;
                 break;
             case "artillary":
-                System.out.println("entrou");
+                System.out.println("entrou artilharia, " + points);
                 artillary_points = artillary_points + points;
                 this.points = this.points + points;
                 break;
             case "siege":
+                System.out.println("entrou cerco, " + points);
                 siege_points = siege_points + points;
                 this.points = this.points + points;
                 break;

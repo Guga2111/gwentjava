@@ -107,6 +107,8 @@ public class Round {
             case "Snow":
                 climates.add(chosenCard);
 
+                if(infantry.isEmpty()) break;
+
                 for(int i = 0; i < infantry.size(); i++) {
                     Card card = infantry.get(i);
                     if(!card.getAbilities().contains("Hero")) card.setPoints(1);
@@ -116,7 +118,8 @@ public class Round {
             case "Fog":
                 climates.add(chosenCard);
 
-                System.out.println(climates.size());
+                if(artillary.isEmpty()) break;
+
                 for(int i = 0; i < artillary.size(); i++) {
                     Card card = artillary.get(i);
                     if(!card.getAbilities().contains("Hero")) card.setPoints(1);
@@ -125,6 +128,8 @@ public class Round {
                 break;
             case "Rain":
                 climates.add(chosenCard);
+
+                if(siege.isEmpty()) break;
 
                 for(int i = 0; i < siege.size(); i++) {
                     Card card = siege.get(i);
@@ -516,6 +521,7 @@ public class Round {
                         if (Stream.of("Snow", "Rain", "Fog", "Sun")
                                 .anyMatch(chosenCard.getAbilities()::contains)) {
                             climateLogic(player, chosenCard);
+                            System.out.println("SALAH");
                         }
 
                         if(board.isDoubleInfantry() && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(chosenCard.getPoints() * 2);
