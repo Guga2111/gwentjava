@@ -166,6 +166,29 @@ public class Board {
         }
     }
 
+    public void ensurePoints(Player player) {
+
+        int soumInfantry = 0;
+        int soumArtillary = 0;
+        int soumSiege = 0;
+
+        for(Card card : player.getBoard().getInfantry()) {
+            soumInfantry = soumInfantry + card.getPoints();
+        }
+        player.getBoard().setInfantry_points(soumInfantry);
+
+        for(Card card : player.getBoard().getArtillary()) {
+            soumArtillary = soumArtillary + card.getPoints();
+        }
+        player.getBoard().setArtillary_points(soumArtillary);
+
+        for(Card card : player.getBoard().getSiege()) {
+            soumSiege = soumSiege + card.getPoints();
+        }
+        player.getBoard().setSiege_points(soumSiege);
+
+        player.getBoard().setPoints(soumSiege + soumArtillary + soumInfantry);
+    }
     public void addPoints(Card card, String card_type){
 
         int points = card.getPoints();

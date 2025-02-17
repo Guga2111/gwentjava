@@ -473,6 +473,8 @@ public class Round {
 
         ArrayList<Card> playerHand = player.getHand();
         Board board = player.getBoard();
+        board.ensurePoints(player);
+        board.ensurePoints(adversary);
 
         System.out.println("Voce deseja passar sua vez, responda com (S) ou (N) ou (LEADER): ");
         String choice = scanner.nextLine().trim().toLowerCase();
