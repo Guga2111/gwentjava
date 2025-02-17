@@ -115,7 +115,8 @@ public class Round {
                 break;
             case "Fog":
                 climates.add(chosenCard);
-                System.out.println(player.getBoard().getClimate().getFirst());
+
+                System.out.println(climates.size());
                 for(int i = 0; i < artillary.size(); i++) {
                     Card card = artillary.get(i);
                     if(!card.getAbilities().contains("Hero")) card.setPoints(1);
@@ -619,7 +620,7 @@ public class Round {
 
             Board board1 = player1.getBoard();
             Board board2 = player2.getBoard();
-            if(!board1.isBoardEmpty() && board2.isBoardEmpty()) eraseBoards(player1,player2);
+            if(!(board1.isBoardEmpty() && board2.isBoardEmpty())) eraseBoards(player1,player2);
 
             player1.setContinueMove(true);
             player2.setContinueMove(true);
