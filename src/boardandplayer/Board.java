@@ -157,6 +157,7 @@ public class Board {
                 addPoints(card, type.toLowerCase());
                 break;
             case "climate":
+                climate.add(card);
                 break;
             case "special":
                 break;

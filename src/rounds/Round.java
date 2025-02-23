@@ -97,6 +97,7 @@ public class Round {
     private void climateLogic(Player player, Card chosenCard) {
 
         String climate = chosenCard.getAbilities().getFirst();
+        System.out.println(climate + "CODY GAKPO");
         ArrayList<Card> climates = player.getBoard().getClimate();
 
         ArrayList<Card> infantry = player.getBoard().getInfantry();
@@ -105,8 +106,6 @@ public class Round {
 
         switch(climate) {
             case "Snow":
-                climates.add(chosenCard);
-
                 if(infantry.isEmpty()) break;
 
                 for(int i = 0; i < infantry.size(); i++) {
@@ -116,8 +115,6 @@ public class Round {
                 }
                 break;
             case "Fog":
-                climates.add(chosenCard);
-
                 if(artillary.isEmpty()) break;
 
                 for(int i = 0; i < artillary.size(); i++) {
@@ -127,8 +124,6 @@ public class Round {
                 }
                 break;
             case "Rain":
-                climates.add(chosenCard);
-
                 if(siege.isEmpty()) break;
 
                 for(int i = 0; i < siege.size(); i++) {
@@ -473,6 +468,7 @@ public class Round {
 
         ArrayList<Card> playerHand = player.getHand();
         Board board = player.getBoard();
+        Board board2 = adversary.getBoard();
         board.ensurePoints(player);
         board.ensurePoints(adversary);
 
@@ -503,14 +499,21 @@ public class Round {
 
                         Card chosenCard = playerHand.get(choose);
 
-                        boolean existSnow = board.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
-                        if(existSnow && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(1);
+                        boolean existSnow1 = board.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
+                        boolean existSnow2 = board2.getClimate().stream().anyMatch(card -> card.getName().equals("Snow"));
+                        if((existSnow1 || existSnow2) && chosenCard.getType().equals("Infantry")) chosenCard.setPoints(1);
 
-                        boolean existRain = board.getClimate().stream().anyMatch(card -> card.getName().equals("Rain"));
-                        if(existRain && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
 
-                        boolean existFog = board.getClimate().stream().anyMatch(card -> card.getName().equals("Fog"));
-                        if(existFog && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
+                        boolean existRain1 = board.getClimate().stream().anyMatch(card -> card.getName().equals("Rain"));
+                        boolean existRain2 = board2.getClimate().stream().anyMatch(card -> card.getName().equals("Rain"));
+                        if((existRain1 || existRain2) && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
+
+                        boolean existFog1 = board.getClimate().stream().anyMatch(card -> card.getName().equals("Fog"));
+                        boolean existFog2 = board2.getClimate().stream().anyMatch(card -> card.getName().equals("Fog"));
+                        String stringFog = String.valueOf(existFog1);
+                        System.out.println(board.getClimate().isEmpty() + "GETCLIME EMPTY°");
+                        System.out.println(stringFog + "EXIST FOG BOOLEAN.");
+                        if((existFog1 || existFog2) && chosenCard.getType().equals("Siege")) chosenCard.setPoints(1);
 
                         if(chosenCard.getAbilities().contains("Heal")) healLogic(player);
                         if(chosenCard.getAbilities().contains("Spy")) spyLogic(player);
@@ -532,7 +535,9 @@ public class Round {
 
                         if(chosenCard.getAbilities().contains("CommanderHorn")) commanderHornLogic(player, chosenCard);
 
+                        System.out.println(chosenCard.getPoints());
                         board.addCard(chosenCard);
+                        System.out.println(board.getClimate().isEmpty() + "GETCLIJME EMPTY2");
                         playerHand.remove(choose);
 
                         verifyHero(player);
